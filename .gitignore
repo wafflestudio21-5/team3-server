@@ -26,6 +26,9 @@ replay_pid*
 # Gradle
 .gradle/
 build/
+!/**/src/**/bin
+!/**/src/**/build
+!gradle/wrapper/gradle-wrapper.jar
 
 # Maven
 target/
