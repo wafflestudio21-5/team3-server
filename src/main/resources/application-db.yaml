@@ -1,0 +1,25 @@
+# Local profile configuration
+spring:
+  profiles: local
+  h2:
+    console:
+      enabled: true  # Enable H2 console
+      path: /h2-console  # H2 console path
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL  # H2 in-memory database URL
+    driver-class-name: org.h2.Driver  # H2 database driver
+    username: sa  # H2 database username
+    password: 1234  # H2 database password
+  jpa:
+    defer-datasource-initialization: true  # Defer database initialization until after JPA starts
+
+---
+# Prod profile configuration
+spring:
+  profiles: prod
+  # TODO: Add MySQL configuration for prod profile
+  # datasource:
+  #   url: jdbc:mysql://localhost:3306/spring-seminar  # MySQL database URL
+  #   driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL database driver
+  #   username: root  # MySQL database username
+  #   password: # Add MySQL password here for prod
