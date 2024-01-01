@@ -1,4 +1,4 @@
-package com.everywaffle.team3server.user.repository
+package com.everywaffle.team3server.user.model
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
