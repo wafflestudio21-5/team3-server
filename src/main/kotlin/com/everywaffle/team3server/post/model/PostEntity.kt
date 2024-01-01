@@ -1,8 +1,6 @@
-@file:Suppress("ktlint:standard:no-wildcard-imports")
+package com.everywaffle.team3server.post.model
 
-package com.everywaffle.team3server.post.repository
-
-import com.everywaffle.team3server.user.repository.UserEntity
+import com.everywaffle.team3server.user.model.UserEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated

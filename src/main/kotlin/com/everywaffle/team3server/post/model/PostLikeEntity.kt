@@ -1,6 +1,6 @@
-package com.everywaffle.team3server.post.repository
+package com.everywaffle.team3server.post.model
 
-import com.everywaffle.team3server.user.repository.UserEntity
+import com.everywaffle.team3server.user.model.UserEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue

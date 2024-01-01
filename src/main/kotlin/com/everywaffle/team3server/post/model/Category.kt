@@ -1,4 +1,4 @@
-package com.everywaffle.team3server.post.repository
+package com.everywaffle.team3server.post.model
 
 enum class Category {
     FREE_BOARD,
