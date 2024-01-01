@@ -35,6 +35,7 @@ dependencies {
 
     // Database
     runtimeOnly("com.h2database:h2") // H2 in-memory database
+    runtimeOnly("com.mysql:mysql-connector-j") // MySQL database
 
     // Testing Dependencies
     testImplementation("org.springframework.boot:spring-boot-starter-test") // Spring Boot testing support
