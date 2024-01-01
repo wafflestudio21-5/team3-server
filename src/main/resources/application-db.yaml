@@ -1,6 +1,7 @@
 # Local profile configuration
+spring.config.activate.on-profile: local
+
 spring:
-  profiles: local
   h2:
     console:
       enabled: true  # Enable H2 console
@@ -15,8 +16,9 @@ spring:
 
 ---
 # Prod profile configuration
+spring.config.activate.on-profile: prod
+
 spring:
-  profiles: prod
   # TODO: Add MySQL configuration for prod profile
   # datasource:
   #   url: jdbc:mysql://localhost:3306/spring-seminar  # MySQL database URL
