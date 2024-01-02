@@ -23,14 +23,6 @@ class UserController(
         return response
     }
 
-    @PostMapping("/api/signop")
-    fun signin(
-        @RequestBody request: SignUpRequest,
-    ): UserResponse.SignUpResponse {
-        val response = userService.signUp(request.userName, request.password, request.email)
-        return response
-    }
-
     @ExceptionHandler
     fun handleException(e: UserException): ResponseEntity<Unit> {
         val status = when (e) {
