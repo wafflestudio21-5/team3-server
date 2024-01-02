@@ -1,0 +1,14 @@
+# Server port configuration
+server:
+  port: 8080
+
+## Server profile and DB configuration
+spring:
+  profiles:
+    active: local  # Set the active Spring profile to 'local'
+  config:
+    import: classpath:application-db.yaml  # Import additional configuration from application-db.yaml
+
+# JWT secret key
+jwt:
+  secret-key: A8jZz0liqdydjdxW3Ocs8mTwmBZTzkZR
