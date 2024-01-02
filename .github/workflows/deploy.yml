@@ -54,6 +54,3 @@ jobs:
             docker stop my-container || true
             docker rm my-container || true
             docker run -d --name my-container -p 80:8080 ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}
-
-
-#TODO: ECR에 올라간 이미지 ECS에 푸시 및 서버 연결 테스트 필요
