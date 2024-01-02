@@ -11,6 +11,8 @@ COPY build.gradle.kts .
 COPY settings.gradle.kts .
 COPY src src
 
+RUN ./gradlew ktlintFormat
+
 # Build the application
 RUN ./gradlew build -x test
 
