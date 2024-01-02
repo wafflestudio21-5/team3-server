@@ -19,6 +19,6 @@ class TestPageController {
                     <p>Welcome to the test page of Team3 Server.</p>
                 </body>
             </html>
-            """.trimIndent()
+        """.trimIndent()
     }
 }
