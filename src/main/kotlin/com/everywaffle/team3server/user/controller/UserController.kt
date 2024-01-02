@@ -5,7 +5,6 @@ import com.everywaffle.team3server.user.service.SignUpEmailConflictException
 import com.everywaffle.team3server.user.service.SignUpUsernameConflictException
 import com.everywaffle.team3server.user.service.UserException
 import com.everywaffle.team3server.user.service.UserService
-import jakarta.annotation.security.PermitAll
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,7 +18,7 @@ class UserController(
     @PostMapping("/api/signup")
     fun signup(
         @RequestBody request: SignUpRequest,
-    ): UserResponse.SignUpResponse{
+    ): UserResponse.SignUpResponse {
         val response = userService.signUp(request.userName, request.password, request.email)
         return response
     }
@@ -38,4 +37,3 @@ data class SignUpRequest(
     val password: String,
     val email: String,
 )
-

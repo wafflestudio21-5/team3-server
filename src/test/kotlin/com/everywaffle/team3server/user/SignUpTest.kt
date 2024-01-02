@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 @SpringBootTest
-class SignUpServiceTest @Autowired constructor(
+class SignUpTest @Autowired constructor(
     private val userService: UserService,
     private val jwtTokenProvider: JwtTokenProvider,
-){
+) {
     @Test
-    @Transactional
-    fun `회원가입 정상 작동 확인`(){
+    fun `회원가입 정상 작동 확인`() {
         val user = assertDoesNotThrow {
             userService.signUp(
                 userName = "test-${javaClass.name}-1",
@@ -35,7 +35,6 @@ class SignUpServiceTest @Autowired constructor(
     }
 
     @Test
-    @Transactional
     fun `회원가입 시 username 충돌하면 예외 처리`() {
         assertDoesNotThrow {
             userService.signUp(
@@ -55,7 +54,6 @@ class SignUpServiceTest @Autowired constructor(
     }
 
     @Test
-    @Transactional
     fun `회원가입 시 email 충돌하면 예외 처리`() {
         assertDoesNotThrow {
             userService.signUp(
@@ -73,7 +71,4 @@ class SignUpServiceTest @Autowired constructor(
             )
         }
     }
-
-
-
 }

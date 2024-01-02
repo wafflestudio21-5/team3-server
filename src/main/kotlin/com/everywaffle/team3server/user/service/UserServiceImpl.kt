@@ -11,11 +11,11 @@ class UserServiceImpl(
     private val userRepository: UserRepository,
     private val jwtTokenProvider: JwtTokenProvider,
 ) : UserService {
-    override fun signUp(userName: String, password: String, email: String): UserResponse.SignUpResponse{
-        if(userRepository.findByUserName(userName) != null){
+    override fun signUp(userName: String, password: String, email: String): UserResponse.SignUpResponse {
+        if (userRepository.findByUserName(userName) != null) {
             throw SignUpUsernameConflictException()
         }
-        if(userRepository.findByEmail(email) != null){
+        if (userRepository.findByEmail(email) != null) {
             throw SignUpEmailConflictException()
         }
         userRepository.save(
