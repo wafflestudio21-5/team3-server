@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker pull "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
             docker stop my-container || true
             docker rm my-container || true
-            docker run -d --name my-container -p 80:8080 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker run -d --name my-container -p 80:8080 "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
