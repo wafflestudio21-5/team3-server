@@ -43,6 +43,12 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
+      - name: Print environment variables
+        run: |
+          echo "Image Tag: $IMAGE_TAG"
+          echo "ECR Registry: $ECR_REGISTRY"
+          echo "ECR Repository: $ECR_REPOSITORY"
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
