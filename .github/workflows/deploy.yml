@@ -9,7 +9,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      IMAGE_TAG: v${{ github.run_number }}
+      IMAGE_TAG: latest
       ECR_REGISTRY: 900017126942.dkr.ecr.ap-northeast-2.amazonaws.com
       ECR_REPOSITORY: team3-server
 
@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+            docker pull 900017126942.dkr.ecr.ap-northeast-2.amazonaws.com/team3-server:latest
             docker stop my-container || true
             docker rm my-container || true
-            docker run -d --name my-container -p 80:8080 "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+            docker run -d --name my-container -p 80:8080 900017126942.dkr.ecr.ap-northeast-2.amazonaws.com/team3-server:latest
