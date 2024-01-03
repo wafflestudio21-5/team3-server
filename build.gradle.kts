@@ -49,6 +49,9 @@ dependencies {
     // JUnit Jupiter API & Mockito Kotlin
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0") // Mockito for Kotlin
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2") // JUnit Jupiter engine
+
+    // Swagger
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 }
 
 tasks.withType<KotlinCompile> {
