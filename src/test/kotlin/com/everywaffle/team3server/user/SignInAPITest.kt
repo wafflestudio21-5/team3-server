@@ -1,7 +1,7 @@
 package com.everywaffle.team3server.user
 
 import com.everywaffle.team3server.user.model.UserEntity
-import com.everywaffle.team3server.user.repository.UserSignInRepository
+import com.everywaffle.team3server.user.repository.UserRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -22,7 +22,7 @@ class SignInAPITest @Autowired constructor(
     private val mapper: ObjectMapper,
 ){
     @MockBean
-    private lateinit var userSignInRepository: UserSignInRepository
+    private lateinit var userRepository: UserRepository
 
     @BeforeEach
     fun setup() {
@@ -31,7 +31,7 @@ class SignInAPITest @Autowired constructor(
             password = "password",
             email = "test@email.com"
         )
-        whenever(userSignInRepository.findByUserName("test")).thenReturn(user)
+        whenever(userRepository.findByUserName("test")).thenReturn(user)
     }
     @Test
     fun `로그인 시 유효하지 않은 경우 404 응답을 내려준다`(){

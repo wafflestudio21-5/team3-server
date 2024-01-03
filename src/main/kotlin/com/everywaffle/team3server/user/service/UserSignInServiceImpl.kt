@@ -3,16 +3,16 @@ package com.everywaffle.team3server.user.service
 import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.dto.LocalSignInResponse
 import com.everywaffle.team3server.user.model.UserEntity
-import com.everywaffle.team3server.user.repository.UserSignInRepository
+import com.everywaffle.team3server.user.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
 class UserSignInServiceImpl(
-    private val userSignInRepository: UserSignInRepository,
+    private val userRepository: UserRepository,
     private val jwtTokenProvider: JwtTokenProvider
 ) : UserSignInService {
     override fun localSignIn(userName: String, password: String): LocalSignInResponse {
-        val user: UserEntity = userSignInRepository.findByUserName(userName)
+        val user: UserEntity = userRepository.findByUserName(userName)
             ?: throw SignInUserNameNotFoundException()
 
         if (user.password != password) throw SignInInvalidPasswordException()

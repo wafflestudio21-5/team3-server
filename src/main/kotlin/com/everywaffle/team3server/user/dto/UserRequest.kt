@@ -1,9 +1,9 @@
 package com.everywaffle.team3server.user.dto
 
-class UserResponse {
-    data class SignUpResponse(
+class UserRequest {
+    data class SignUpRequest(
         val userName: String,
+        val password: String,
         val email: String,
-        val token: String,
     )
 }
