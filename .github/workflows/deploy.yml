@@ -58,4 +58,4 @@ jobs:
             docker pull 900017126942.dkr.ecr.ap-northeast-2.amazonaws.com/team3-server:latest
             docker stop my-container || true
             docker rm my-container || true
-            docker run -d --name my-container -p 80:8080 900017126942.dkr.ecr.ap-northeast-2.amazonaws.com/team3-server:latest
+            docker run -d --name my-container --network my_network -p 80:8080 900017126942.dkr.ecr.ap-northeast-2.amazonaws.com/team3-server:latest
