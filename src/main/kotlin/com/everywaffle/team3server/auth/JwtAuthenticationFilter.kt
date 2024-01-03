@@ -48,6 +48,6 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
     }
 
     private fun isExcludedPath(path: String): Boolean {
-        return path.startsWith("/api/signin") || path.startsWith("/api/signup") || path.startsWith("/test-page")
+        return path.startsWith("/signin") || path.startsWith("/signup") || path.startsWith("/test-page")
     }
 }
