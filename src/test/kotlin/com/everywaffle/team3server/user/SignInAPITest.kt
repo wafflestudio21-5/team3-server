@@ -35,6 +35,19 @@ class SignInAPITest @Autowired constructor(
     }
     @Test
     fun `로그인 시 유효하지 않은 경우 404 응답을 내려준다`(){
+        //        mvc.perform(
+//            post("/api/signup")
+//                .content(
+//                    mapper.writeValueAsString(
+//                        mapOf(
+//                            "userName" to "test",
+//                            "password" to "password"
+//                        )
+//                    )
+//                )
+//                .contentType(MediaType.APPLICATION_JSON)
+//        )
+//            .andExpect(status().`is`(200))
         mvc.perform(
             post("/api/signin")
                 .content(
