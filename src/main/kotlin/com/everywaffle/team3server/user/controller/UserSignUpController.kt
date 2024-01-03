@@ -1,5 +1,6 @@
 package com.everywaffle.team3server.user.controller
 
+import com.everywaffle.team3server.user.dto.UserRequest
 import com.everywaffle.team3server.user.dto.UserResponse
 import com.everywaffle.team3server.user.service.SignUpEmailConflictException
 import com.everywaffle.team3server.user.service.SignUpUsernameConflictException
@@ -17,7 +18,7 @@ class UserSignUpController(
 ) {
     @PostMapping("/api/signup")
     fun signup(
-        @RequestBody request: SignUpRequest,
+        @RequestBody request: UserRequest.SignUpRequest,
     ): UserResponse.SignUpResponse {
         val response = userSignUpService.signUp(request.userName, request.password, request.email)
         return response
@@ -31,9 +32,3 @@ class UserSignUpController(
         return ResponseEntity.status(status).build()
     }
 }
-
-data class SignUpRequest(
-    val userName: String,
-    val password: String,
-    val email: String,
-)
