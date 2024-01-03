@@ -1,11 +1,12 @@
-package com.everywaffle.team3server.auth
+package com.everywaffle.team3server.user
 
+import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.dto.LocalSignInRequest
 import com.everywaffle.team3server.user.model.UserEntity
-import com.everywaffle.team3server.user.repository.UserRepository
+import com.everywaffle.team3server.user.repository.UserSignInRepository
 import com.everywaffle.team3server.user.service.SignInInvalidPasswordException
 import com.everywaffle.team3server.user.service.SignInUserNameNotFoundException
-import com.everywaffle.team3server.user.service.UserServiceImpl
+import com.everywaffle.team3server.user.service.UserSignInServiceImpl
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,16 +20,16 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class SignInServiceTest {
     @Mock
-    private lateinit var userRepository: UserRepository
+    private lateinit var userSignInRepository: UserSignInRepository
 
     @Mock
     private lateinit var jwtTokenProvider: JwtTokenProvider
 
-    private lateinit var userService: UserServiceImpl
+    private lateinit var userService: UserSignInServiceImpl
 
     @BeforeEach
     fun setUp() {
-        userService = UserServiceImpl(userRepository, jwtTokenProvider)
+        userService = UserSignInServiceImpl(userSignInRepository, jwtTokenProvider)
     }
     @Test
     fun `유효한 자격에 대해 로그인 할 수 있어야 한다`() {
@@ -36,7 +37,7 @@ class SignInServiceTest {
         val userEntity = UserEntity(userName = "user", password = "password", email = "user@example.com")
         val jwtToken = "jwtToken"
 
-        whenever(userRepository.findByUserName(request.userName)).thenReturn(userEntity)
+        whenever(userSignInRepository.findByUserName(request.userName)).thenReturn(userEntity)
         whenever(jwtTokenProvider.createToken(request.userName)).thenReturn(jwtToken)
 
         val result = assertDoesNotThrow { userService.localSignIn(request.userName, request.password) }
@@ -51,7 +52,7 @@ class SignInServiceTest {
     fun `유효하지 않은 이름에 대해 자체 로그인은 SignInUserNameNotFoundException을 Throw 해야 한다`() {
         val request = LocalSignInRequest(userName = "invalidUser", password = "password")
 
-        whenever(userRepository.findByUserName(request.userName)).thenReturn(null)
+        whenever(userSignInRepository.findByUserName(request.userName)).thenReturn(null)
 
         assertThrows<SignInUserNameNotFoundException> {
             userService.localSignIn(request.userName, request.password)
@@ -62,7 +63,7 @@ class SignInServiceTest {
         val request = LocalSignInRequest(userName = "user", password = "wrongPassword")
         val userEntity = UserEntity(userName = "user", password = "password", email = "user@example.com")
 
-        whenever(userRepository.findByUserName(request.userName)).thenReturn(userEntity)
+        whenever(userSignInRepository.findByUserName(request.userName)).thenReturn(userEntity)
 
         assertThrows<SignInInvalidPasswordException> {
             userService.localSignIn(request.userName, request.password)
