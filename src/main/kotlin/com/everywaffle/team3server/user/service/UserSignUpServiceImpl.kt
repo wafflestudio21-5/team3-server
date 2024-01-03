@@ -7,10 +7,10 @@ import com.everywaffle.team3server.user.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl(
+class UserSignUpServiceImpl(
     private val userRepository: UserRepository,
     private val jwtTokenProvider: JwtTokenProvider,
-) : UserService {
+) : UserSignUpService {
     override fun signUp(userName: String, password: String, email: String): UserResponse.SignUpResponse {
         if (userRepository.findByUserName(userName) != null) {
             throw SignUpUsernameConflictException()

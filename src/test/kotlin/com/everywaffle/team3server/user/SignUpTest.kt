@@ -3,7 +3,7 @@ package com.everywaffle.team3server.user
 import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.service.SignUpEmailConflictException
 import com.everywaffle.team3server.user.service.SignUpUsernameConflictException
-import com.everywaffle.team3server.user.service.UserService
+import com.everywaffle.team3server.user.service.UserSignUpService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -15,13 +15,13 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 @SpringBootTest
 class SignUpTest @Autowired constructor(
-    private val userService: UserService,
+    private val userSignUpService: UserSignUpService,
     private val jwtTokenProvider: JwtTokenProvider,
 ) {
     @Test
     fun `회원가입 정상 작동 확인`() {
         val user = assertDoesNotThrow {
-            userService.signUp(
+            userSignUpService.signUp(
                 userName = "test-${javaClass.name}-1",
                 password = "spring",
                 email = "waffle@everywaffle.com"
@@ -37,7 +37,7 @@ class SignUpTest @Autowired constructor(
     @Test
     fun `회원가입 시 username 충돌하면 예외 처리`() {
         assertDoesNotThrow {
-            userService.signUp(
+            userSignUpService.signUp(
                 userName = "test-${javaClass.name}-1",
                 password = "spring",
                 email = "waffle@everywaffle.com"
@@ -45,7 +45,7 @@ class SignUpTest @Autowired constructor(
         }
 
         assertThrows<SignUpUsernameConflictException> {
-            userService.signUp(
+            userSignUpService.signUp(
                 userName = "test-${javaClass.name}-1",
                 password = "spring",
                 email = "waffle1@everywaffle.com"
@@ -56,7 +56,7 @@ class SignUpTest @Autowired constructor(
     @Test
     fun `회원가입 시 email 충돌하면 예외 처리`() {
         assertDoesNotThrow {
-            userService.signUp(
+            userSignUpService.signUp(
                 userName = "test-${javaClass.name}-1",
                 password = "spring",
                 email = "waffle@everywaffle.com"
@@ -64,7 +64,7 @@ class SignUpTest @Autowired constructor(
         }
 
         assertThrows<SignUpEmailConflictException> {
-            userService.signUp(
+            userSignUpService.signUp(
                 userName = "test-${javaClass.name}-2",
                 password = "spring",
                 email = "waffle@everywaffle.com"
