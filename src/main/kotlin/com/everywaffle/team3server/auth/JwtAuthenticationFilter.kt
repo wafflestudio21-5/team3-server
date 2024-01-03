@@ -15,7 +15,7 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
     ) {
         val httpRequest = request as HttpServletRequest
 
-        if (isExcludedPath(httpRequest.pathInfo)) {
+        if (isExcludedPath("/" + httpRequest.requestURI.substringAfterLast("/"))) {
             chain.doFilter(request, response)
             return
         }
