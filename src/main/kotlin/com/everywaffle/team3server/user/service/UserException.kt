@@ -1,4 +1,7 @@
 package com.everywaffle.team3server.user.service
 
-class UserException {
-}
+sealed class UserException : RuntimeException()
+
+class SignInUserNameNotFoundException : UserException()
+
+class SignInInvalidPasswordException : UserException()
