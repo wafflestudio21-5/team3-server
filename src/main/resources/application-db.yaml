@@ -19,9 +19,12 @@ spring:
 spring.config.activate.on-profile: prod
 
 spring:
-  # TODO: Add MySQL configuration for prod profile
-  # datasource:
-  #   url: jdbc:mysql://localhost:3306/spring-seminar  # MySQL database URL
-  #   driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL database driver
-  #   username: root  # MySQL database username
-  #   password: # Add MySQL password here for prod
+  datasource:
+    url: jdbc:mysql://mysql-container:3306/everywaffle # MySQL database URL
+    driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL database driver
+    username: team3 # MySQL database username
+    password: team3pw  # MySQL database password
+  jpa:
+    hibernate:
+      ddl-auto: update  # or 'create' if you want to create tables on startup
+    show-sql: true
