@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
-
 @Configuration
 class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
 
@@ -22,18 +21,19 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
             .httpBasic() { it -> it.disable() }
             .csrf() { it -> it.disable() }
             .sessionManagement() { it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            .authorizeHttpRequests() { it -> it
-                .requestMatchers("/api/signin").permitAll()
-                .requestMatchers("/api/signup").permitAll()
-                .anyRequest().authenticated() }
-            .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java);
+            .authorizeHttpRequests() { it ->
+                it
+                    .requestMatchers("/api/signin").permitAll()
+                    .requestMatchers("/api/signup").permitAll()
+                    .anyRequest().authenticated()
+            }
+            .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
 
-        return http.build();
+        return http.build()
     }
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder()
     }
-
 }

@@ -7,7 +7,8 @@ import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.SignInInvalidPasswordException
 import com.everywaffle.team3server.user.service.SignInUserNameNotFoundException
 import com.everywaffle.team3server.user.service.UserSignInServiceImpl
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.assertThrows
 import org.mockito.Mock
 import org.mockito.kotlin.whenever
 import org.springframework.boot.test.context.SpringBootTest
-
 
 @SpringBootTest
 class SignInServiceTest {
@@ -69,6 +69,4 @@ class SignInServiceTest {
             userService.localSignIn(request.userName, request.password)
         }
     }
-
-
 }
