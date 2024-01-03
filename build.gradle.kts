@@ -25,6 +25,7 @@ dependencies {
     // Spring Boot Starters for basic setup
     implementation("org.springframework.boot:spring-boot-starter-data-jpa") // Spring Boot starter for JPA
     implementation("org.springframework.boot:spring-boot-starter-security") // Spring Boot starter for security
+    implementation("org.springframework.security:spring-security-test")
     implementation("org.springframework.boot:spring-boot-starter-web") // Spring Boot starter for web applications
 
     // JSON Processing
@@ -43,6 +44,7 @@ dependencies {
 
     // JWT Handling
     implementation("com.auth0:java-jwt:4.4.0") // For JWT creation and validation
+    implementation("io.jsonwebtoken:jjwt:0.9.1") // For JWT Token
 
     // JUnit Jupiter API & Mockito Kotlin
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0") // Mockito for Kotlin
