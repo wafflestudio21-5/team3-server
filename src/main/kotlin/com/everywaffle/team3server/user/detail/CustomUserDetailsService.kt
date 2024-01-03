@@ -14,5 +14,4 @@ class CustomUserDetailsService(
             ?: throw UsernameNotFoundException("UserName Not Found.")
         return CustomUserDetails(user)
     }
-
 }
