@@ -13,7 +13,7 @@ class FilterConfig(private val jwtTokenProvider: JwtTokenProvider) {
     fun jwtFilterRegistrationBean(): FilterRegistrationBean<JwtAuthenticationFilter> {
         val registrationBean = FilterRegistrationBean<JwtAuthenticationFilter>()
         registrationBean.filter = JwtAuthenticationFilter(jwtTokenProvider)
-        registrationBean.addUrlPatterns("/api/**") // 보호할 URL 패턴 지정
+        registrationBean.addUrlPatterns("/api/*") // 보호할 URL 패턴 지정
         return registrationBean
     }
 }
