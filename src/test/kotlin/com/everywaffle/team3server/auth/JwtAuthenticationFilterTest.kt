@@ -34,7 +34,7 @@ class JwtAuthenticationFilterTest {
     @Test
     fun `When path is excluded, filter should not check token`() {
         // 토큰 검증 대상 path가 아닌 경우, filter가 token을 체크하지 않는지 확인
-        request.pathInfo = "/api/signin"
+        request.requestURI = "/api/signin"
 
         jwtAuthenticationFilter.doFilter(request, response, filterChain)
 
