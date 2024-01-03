@@ -34,7 +34,7 @@ class JwtAuthenticationFilterTest {
     @Test
     fun `When path is excluded, filter should not check token`() {
         // 토큰 검증 대상 path가 아닌 경우, filter가 token을 체크하지 않는지 확인
-        request.servletPath = "/signin"
+        request.pathInfo = "/api/signin"
 
         jwtAuthenticationFilter.doFilter(request, response, filterChain)
 
@@ -45,7 +45,7 @@ class JwtAuthenticationFilterTest {
     @Test
     fun `When valid token is provided, filter should allow request`() {
         // valid한 token에 대해 request를 allow하는지 확인
-        request.servletPath = "/api/test"
+        request.pathInfo = "/api/test"
         request.addHeader("Authorization", "Bearer validToken")
         whenever(jwtTokenProvider.validateToken("validToken")).thenReturn(true)
 
@@ -57,7 +57,7 @@ class JwtAuthenticationFilterTest {
     @Test
     fun `When invalid token is provided, filter should reject request`() {
         // invalid한 token에 대해 request를 reject하는지 확인
-        request.servletPath = "/api/test"
+        request.pathInfo = "/api/test"
         request.addHeader("Authorization", "Bearer invalidToken")
         whenever(jwtTokenProvider.validateToken("invalidToken")).thenReturn(false)
 
