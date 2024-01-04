@@ -24,6 +24,7 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
                 it
                     .requestMatchers("/api/signup").permitAll()
                     .requestMatchers("/api/signin").permitAll()
+                    .requestMatchers("/test-page").permitAll()
                     .requestMatchers("/swagger-ui/**").permitAll()
                     .requestMatchers("/v3/api-docs/**").permitAll()
                     .anyRequest().authenticated()
