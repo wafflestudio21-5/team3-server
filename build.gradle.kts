@@ -25,6 +25,8 @@ dependencies {
     // Spring Boot Starters for basic setup
     implementation("org.springframework.boot:spring-boot-starter-data-jpa") // Spring Boot starter for JPA
     implementation("org.springframework.boot:spring-boot-starter-web") // Spring Boot starter for web applications
+    implementation("org.springframework.boot:spring-boot-starter-security") // Spring Boot starter for security
+    implementation("org.springframework.security:spring-security-test")
 
     // JSON Processing
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin") // Serialize/deserialize Kotlin classes to/from JSON
