@@ -26,8 +26,8 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
                 // 유효한 토큰인 경우, 요청 처리
             } else {
                 // 유효하지 않은 토큰인 경우, 에러 응답
-                (response as HttpServletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT token")
-                return
+                // (response as HttpServletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT token")
+                // return
             }
         } catch (e: JwtValidationException) {
             // JWT 검증 실패 시 예외 처리
