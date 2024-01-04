@@ -5,7 +5,6 @@ import com.everywaffle.team3server.auth.JwtTokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -14,18 +13,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
-
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .httpBasic() { it -> it.disable() }
-            .csrf() { it -> it.disable() }
-            .sessionManagement() { it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            .authorizeHttpRequests() { it ->
+            .httpBasic { it -> it.disable() }
+            .csrf { it -> it.disable() }
+            .sessionManagement { it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .authorizeHttpRequests { it ->
                 it
-                    .requestMatchers("/", "/**").permitAll()
-                    .requestMatchers("/api/**").permitAll()
+                    .requestMatchers("/api/signup").permitAll()
+                    .requestMatchers("/api/signin").permitAll()
+                    .requestMatchers("/swagger-ui/**").permitAll()
+                    .requestMatchers("/v3/api-docs/**").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
