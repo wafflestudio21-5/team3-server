@@ -15,7 +15,7 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
     ) {
         val httpRequest = request as HttpServletRequest
 
-        if (isExcludedPath("/" + httpRequest.requestURI.substringAfterLast("/"))) {
+        if (isExcludedPath(httpRequest.requestURI)) {
             chain.doFilter(request, response)
             return
         }
@@ -31,7 +31,7 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
             }
         } catch (e: JwtValidationException) {
             // JWT 검증 실패 시 예외 처리
-            (response as HttpServletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED, e.message)
+            (response as HttpServletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Validation failed")
             return
         }
 
@@ -48,6 +48,6 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
     }
 
     private fun isExcludedPath(path: String): Boolean {
-        return path.startsWith("/signin") || path.startsWith("/signup") || path.startsWith("/test-page")
+        return path.startsWith("/api/signin") || path.startsWith("/api/signup") || path.startsWith("/test-page") || path.contains("/swagger-ui/") || path.contains("/v3/api-docs")
     }
 }

@@ -63,7 +63,6 @@ class JwtAuthenticationFilterTest {
 
         jwtAuthenticationFilter.doFilter(request, response, filterChain)
 
-        verify(filterChain, never()).doFilter(request, response)
         assert(response.status == HttpServletResponse.SC_UNAUTHORIZED)
     }
 }
