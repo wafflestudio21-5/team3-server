@@ -12,7 +12,10 @@ import com.everywaffle.team3server.user.service.UserException
 import com.everywaffle.team3server.user.service.UserSignInService
 import com.everywaffle.team3server.user.service.UserSignUpService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class UserSignUpController(
@@ -20,10 +23,13 @@ class UserSignUpController(
     private val userSignInService: UserSignInService,
 ) {
     @PostMapping("/api/signin")
-    fun signin(@RequestBody request: LocalSignInRequest): LocalSignInResponse {
+    fun signin(
+        @RequestBody request: LocalSignInRequest,
+    ): LocalSignInResponse {
         val response = userSignInService.localSignIn(request.userName, request.password)
         return response
     }
+
     @PostMapping("/api/signup")
     fun signup(
         @RequestBody request: UserRequest.SignUpRequest,
@@ -34,10 +40,11 @@ class UserSignUpController(
 
     @ExceptionHandler
     fun handleException(e: UserException): ResponseEntity<Unit> {
-        val status = when (e) {
-            is SignInUserNameNotFoundException, is SignInInvalidPasswordException -> 404
-            is SignUpUsernameConflictException, is SignUpEmailConflictException -> 409
-        }
+        val status =
+            when (e) {
+                is SignInUserNameNotFoundException, is SignInInvalidPasswordException -> 404
+                is SignUpUsernameConflictException, is SignUpEmailConflictException -> 409
+            }
         return ResponseEntity.status(status).build()
     }
 }
