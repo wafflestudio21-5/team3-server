@@ -13,8 +13,9 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
-class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider,
-                     private val customOAuth2UserService: CustomOAuth2UserService,
+class SecurityConfig(
+    private val jwtTokenProvider: JwtTokenProvider,
+    private val customOAuth2UserService: CustomOAuth2UserService
 ) {
     @Bean
     @Throws(Exception::class)
@@ -34,9 +35,9 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider,
                     .anyRequest().authenticated()
             }
             .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
-            //소셜 로그인
-            .oauth2Login{
-                it.userInfoEndpoint{
+            // 소셜 로그인
+            .oauth2Login {
+                it.userInfoEndpoint {
                     it.userService(customOAuth2UserService)
                 }
                     .defaultSuccessUrl("/welcome", true)
