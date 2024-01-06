@@ -14,11 +14,11 @@ class CustomOAuth2UserService(
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
 ) : DefaultOAuth2UserService() {
-    private val logger : Logger = LoggerFactory.getLogger(CustomOAuth2UserService::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(CustomOAuth2UserService::class.java)
     override fun loadUser(userRequest: OAuth2UserRequest): OAuth2User {
         // OAuth2UserRequest를 통해 카카오에서 사용자 정보를 로드
         val oAuth2User = super.loadUser(userRequest)
-        logger.info("{}",oAuth2User.attributes)
+        logger.info("{}", oAuth2User.attributes)
 
         // 카카오에서 제공하는 사용자 정보를 추출
         val attributes = oAuth2User.attributes
@@ -34,12 +34,10 @@ class CustomOAuth2UserService(
                 userSignUpService.signUp(userName = userName, password = "", email = "")
             } else {
                 // 이미 존재하는 사용자라면 필요한 경우 로그인 처리
-                userSignInService.localSignIn(existingUser.userName,existingUser.password)
+                userSignInService.localSignIn(existingUser.userName, existingUser.password)
             }
         }
 
         return oAuth2User
     }
 }
-
-
