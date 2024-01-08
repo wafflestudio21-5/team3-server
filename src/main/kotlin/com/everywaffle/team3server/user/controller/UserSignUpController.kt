@@ -13,6 +13,7 @@ import com.everywaffle.team3server.user.service.UserSignInService
 import com.everywaffle.team3server.user.service.UserSignUpService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -37,7 +38,14 @@ class UserSignUpController(
         val response = userSignUpService.signUp(request.userName, request.password, request.email)
         return response
     }
-
+    @GetMapping("/login")
+    fun login(): String {
+        return "login"
+    }
+    @GetMapping("/welcome")
+    fun home(): String {
+        return "welcome"
+    }
     @ExceptionHandler
     fun handleException(e: UserException): ResponseEntity<Unit> {
         val status =

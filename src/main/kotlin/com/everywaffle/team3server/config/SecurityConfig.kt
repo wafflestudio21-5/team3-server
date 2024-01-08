@@ -2,6 +2,7 @@ package com.everywaffle.team3server.config
 
 import com.everywaffle.team3server.auth.JwtAuthenticationFilter
 import com.everywaffle.team3server.auth.JwtTokenProvider
+import com.everywaffle.team3server.user.service.CustomOAuth2UserService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -12,7 +13,10 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
-class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
+class SecurityConfig(
+    private val jwtTokenProvider: JwtTokenProvider,
+    private val customOAuth2UserService: CustomOAuth2UserService
+) {
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
@@ -22,6 +26,7 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
             .sessionManagement { it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests { it ->
                 it
+                    .requestMatchers("/welcome").permitAll()
                     .requestMatchers("/api/signup").permitAll()
                     .requestMatchers("/api/signin").permitAll()
                     .requestMatchers("/test-page").permitAll()
@@ -30,7 +35,13 @@ class SecurityConfig(private val jwtTokenProvider: JwtTokenProvider) {
                     .anyRequest().authenticated()
             }
             .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
-
+            // 소셜 로그인
+            .oauth2Login {
+                it.userInfoEndpoint {
+                    it.userService(customOAuth2UserService)
+                }
+                    .defaultSuccessUrl("/welcome", true)
+            }
         return http.build()
     }
 
