@@ -11,6 +11,7 @@ import com.everywaffle.team3server.user.service.UserException
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -27,6 +28,14 @@ class UserDetailController(private val userDetailService: UserDetailService) {
     ): ResponseEntity<UserDetailResponse.UserDetail> {
         val updatedUserDetail = userDetailService.createOrUpdateUserDetail(id, userDetailDto)
         return ResponseEntity.ok(updatedUserDetail)
+    }
+
+    @GetMapping("/{id}")
+    fun getUserDetail(
+        @PathVariable id: Long,
+    ): ResponseEntity<UserDetailResponse.UserDetail> {
+        val userDetail = userDetailService.getUserDetail(id)
+        return ResponseEntity.ok(userDetail)
     }
 
     @ExceptionHandler
