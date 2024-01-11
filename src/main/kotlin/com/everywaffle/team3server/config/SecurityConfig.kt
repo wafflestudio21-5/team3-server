@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 class SecurityConfig(
     private val jwtTokenProvider: JwtTokenProvider,
-    private val customOAuth2UserService: CustomOAuth2UserService
+    private val customOAuth2UserService: CustomOAuth2UserService,
 ) {
     @Bean
     @Throws(Exception::class)
@@ -26,6 +26,7 @@ class SecurityConfig(
             .sessionManagement { it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests { it ->
                 it
+                    .requestMatchers("/**").permitAll()
                     .requestMatchers("/welcome").permitAll()
                     .requestMatchers("/api/signup").permitAll()
                     .requestMatchers("/api/signin").permitAll()
