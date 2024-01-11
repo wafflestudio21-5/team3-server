@@ -11,9 +11,7 @@ CREATE TABLE users (
    user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
    user_name VARCHAR(255) UNIQUE NOT NULL,
    password VARCHAR(255) NOT NULL,
-   email VARCHAR(255) UNIQUE NOT NULL,
-   user_detail_id BIGINT UNIQUE,
-   FOREIGN KEY (user_detail_id) REFERENCES user_details(id)
+   email VARCHAR(255) UNIQUE NOT NULL
 );
 
 -- User Details Table
