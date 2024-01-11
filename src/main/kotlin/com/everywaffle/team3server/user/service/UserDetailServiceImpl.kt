@@ -3,7 +3,6 @@ package com.everywaffle.team3server.user.service
 import com.everywaffle.team3server.user.dto.UserDetailRequest
 import com.everywaffle.team3server.user.dto.UserDetailResponse
 import com.everywaffle.team3server.user.model.UserDetailEntity
-import com.everywaffle.team3server.user.model.UserEntity
 import com.everywaffle.team3server.user.repository.UserDetailRepository
 import com.everywaffle.team3server.user.repository.UserRepository
 import jakarta.transaction.Transactional
