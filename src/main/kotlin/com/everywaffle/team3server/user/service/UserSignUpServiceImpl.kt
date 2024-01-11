@@ -18,7 +18,7 @@ class UserSignUpServiceImpl(
         if (userRepository.findByEmail(email) != null) {
             throw SignUpEmailConflictException()
         }
-        userRepository.save(
+        val user = userRepository.save(
             UserEntity(
                 userName = userName,
                 password = password,
@@ -26,6 +26,6 @@ class UserSignUpServiceImpl(
             )
         )
         val token = jwtTokenProvider.createToken(userName)
-        return UserResponse.SignUpResponse(userName, email, token)
+        return UserResponse.SignUpResponse(user.userId, userName, email, token)
     }
 }
