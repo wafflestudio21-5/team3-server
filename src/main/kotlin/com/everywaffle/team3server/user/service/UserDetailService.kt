@@ -8,4 +8,8 @@ interface UserDetailService {
         userId: Long,
         userDetail: UserDetailRequest.UserDetail,
     ): UserDetailResponse.UserDetail
+
+    fun getUserDetail(
+        userId: Long
+    ): UserDetailResponse.UserDetail
 }

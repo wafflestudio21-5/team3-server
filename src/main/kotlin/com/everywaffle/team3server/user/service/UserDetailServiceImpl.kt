@@ -3,6 +3,7 @@ package com.everywaffle.team3server.user.service
 import com.everywaffle.team3server.user.dto.UserDetailRequest
 import com.everywaffle.team3server.user.dto.UserDetailResponse
 import com.everywaffle.team3server.user.model.UserDetailEntity
+import com.everywaffle.team3server.user.model.UserEntity
 import com.everywaffle.team3server.user.repository.UserDetailRepository
 import com.everywaffle.team3server.user.repository.UserRepository
 import jakarta.transaction.Transactional
@@ -40,6 +41,22 @@ class UserDetailServiceImpl(
             nickname = savedUserDetail.nickname,
             department = savedUserDetail.department,
             studentId = savedUserDetail.studentId,
+        )
+    }
+
+    override fun getUserDetail(userId: Long): UserDetailResponse.UserDetail {
+        val user = userRepository.findById(userId).orElseThrow {
+            RuntimeException("User not found with id: $userId")
+        }
+        val userDetail = userDetailRepository.findByUser(user)
+            ?: throw RuntimeException("User Detail not found with id: $userId")
+
+        return UserDetailResponse.UserDetail(
+            userId = user.userId,
+            realName = userDetail.realName,
+            nickname = userDetail.nickname,
+            department = userDetail.department,
+            studentId = userDetail.studentId,
         )
     }
 }
