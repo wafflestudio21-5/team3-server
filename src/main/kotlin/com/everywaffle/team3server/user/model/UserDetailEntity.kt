@@ -22,6 +22,6 @@ class UserDetailEntity(
     @Column(nullable = false)
     val studentId: Int,
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "userId")
+    @JoinColumn(name = "user_id", referencedColumnName = "userId", unique = true)
     val user: UserEntity,
 )
