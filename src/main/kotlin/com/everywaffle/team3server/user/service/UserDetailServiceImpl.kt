@@ -42,4 +42,20 @@ class UserDetailServiceImpl(
             studentId = savedUserDetail.studentId,
         )
     }
+
+    override fun getUserDetail(userId: Long): UserDetailResponse.UserDetail {
+        val user = userRepository.findById(userId).orElseThrow {
+            RuntimeException("User not found with id: $userId")
+        }
+        val userDetail = userDetailRepository.findByUser(user)
+            ?: throw RuntimeException("User Detail not found with id: $userId")
+
+        return UserDetailResponse.UserDetail(
+            userId = user.userId,
+            realName = userDetail.realName,
+            nickname = userDetail.nickname,
+            department = userDetail.department,
+            studentId = userDetail.studentId,
+        )
+    }
 }
