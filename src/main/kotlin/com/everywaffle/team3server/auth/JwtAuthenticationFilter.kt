@@ -48,7 +48,6 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
     }
 
     private fun isExcludedPath(path: String): Boolean {
-        // redirection error 때문에 잠시 다 열어뒀습니다
         return path.startsWith("/api/signin") || path.startsWith("/api/signup") || path.startsWith("/test-page") || path.contains("/swagger-ui/") || path.contains("/v3/api-docs")
     }
 }
