@@ -3,14 +3,26 @@ DROP TABLE IF EXISTS comment_likes;
 DROP TABLE IF EXISTS post_likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS users;
 
 -- Users Table
 CREATE TABLE users (
-    user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_name VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL
+   user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+   user_name VARCHAR(255) UNIQUE NOT NULL,
+   password VARCHAR(255) NOT NULL,
+   email VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- User Details Table
+CREATE TABLE user_details (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    real_name VARCHAR(255) NOT NULL,
+    nickname VARCHAR(255) NOT NULL,
+    department VARCHAR(255) NOT NULL,
+    student_id INT NOT NULL,
+    user_id BIGINT UNIQUE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 -- Posts Table

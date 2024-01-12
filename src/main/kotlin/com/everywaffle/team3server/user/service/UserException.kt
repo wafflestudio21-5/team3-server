@@ -5,6 +5,9 @@ sealed class UserException : RuntimeException()
 class SignUpUsernameConflictException : UserException()
 
 class SignUpEmailConflictException : UserException()
+
 class SignInUserNameNotFoundException : UserException()
 
 class SignInInvalidPasswordException : UserException()
+
+class UserNotFoundException : UserException()

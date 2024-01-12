@@ -9,6 +9,7 @@ import com.everywaffle.team3server.user.service.SignInUserNameNotFoundException
 import com.everywaffle.team3server.user.service.SignUpEmailConflictException
 import com.everywaffle.team3server.user.service.SignUpUsernameConflictException
 import com.everywaffle.team3server.user.service.UserException
+import com.everywaffle.team3server.user.service.UserNotFoundException
 import com.everywaffle.team3server.user.service.UserSignInService
 import com.everywaffle.team3server.user.service.UserSignUpService
 import org.springframework.http.ResponseEntity
@@ -38,19 +39,22 @@ class UserSignUpController(
         val response = userSignUpService.signUp(request.userName, request.password, request.email)
         return response
     }
+
     @GetMapping("/login")
     fun login(): String {
         return "login"
     }
+
     @GetMapping("/welcome")
     fun home(): String {
         return "welcome"
     }
+
     @ExceptionHandler
     fun handleException(e: UserException): ResponseEntity<Unit> {
         val status =
             when (e) {
-                is SignInUserNameNotFoundException, is SignInInvalidPasswordException -> 404
+                is SignInUserNameNotFoundException, is SignInInvalidPasswordException, is UserNotFoundException -> 404
                 is SignUpUsernameConflictException, is SignUpEmailConflictException -> 409
             }
         return ResponseEntity.status(status).build()
