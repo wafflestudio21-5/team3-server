@@ -22,22 +22,24 @@ class CustomOAuth2UserService(
 
         // 카카오에서 제공하는 사용자 정보를 추출
         val attributes = oAuth2User.attributes
-        //
-        val kakaoId = attributes["id"] as? String ?: ""
-
+        val kakaoId = ("" + attributes["id"]) as? String ?: ""
         if (kakaoId.isNotEmpty()) {
             val userName = "kakao-$kakaoId"
             val existingUser = userRepository.findByUserName(userName)
-
             if (existingUser == null) {
                 // 사용자가 존재하지 않으면 회원가입
                 userSignUpService.signUp(userName = userName, password = "", email = "")
+                val newUser = userRepository.findByUserName(userName)
+                if (newUser != null) {
+                    userSignInService.localSignIn(newUser.userName, newUser.password)
+                } else {
+                    throw UserNotFoundException()
+                }
             } else {
                 // 이미 존재하는 사용자라면 필요한 경우 로그인 처리
                 userSignInService.localSignIn(existingUser.userName, existingUser.password)
             }
         }
-
         return oAuth2User
     }
 }
