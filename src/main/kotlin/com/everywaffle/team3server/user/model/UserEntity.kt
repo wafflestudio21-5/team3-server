@@ -13,7 +13,7 @@ class UserEntity(
     val userId: Long = 0,
     @Column(unique = true)
     val userName: String,
-    val password: String,
+    var password: String,
     @Column(unique = true)
-    val email: String,
+    var email: String,
 )
