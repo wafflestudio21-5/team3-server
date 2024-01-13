@@ -7,9 +7,9 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 @ExtendWith(MockitoExtension::class)
 class UserDetailControllerTest {
@@ -32,8 +32,10 @@ class UserDetailControllerTest {
         val userId = 1L
         val newPassword = "newPassword123"
 
-        mockMvc.perform(post("/api/details/$userId/change-password")
-            .param("newPassword", newPassword))
+        mockMvc.perform(
+            post("/api/details/$userId/change-password")
+                .param("newPassword", newPassword)
+        )
             .andExpect(status().isOk)
     }
 
@@ -42,8 +44,12 @@ class UserDetailControllerTest {
         val userId = 1L
         val newEmail = "newemail@example.com"
 
-        mockMvc.perform(post("/api/details/$userId/change-email")
-            .param("newEmail", newEmail))
+        mockMvc.perform(
+            post(
+                "/api/details/$userId/change-email"
+            )
+                .param("newEmail", newEmail)
+        )
             .andExpect(status().isOk)
     }
 }
