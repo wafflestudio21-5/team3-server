@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -37,7 +38,23 @@ class UserDetailController(private val userDetailService: UserDetailService) {
         val userDetail = userDetailService.getUserDetail(id)
         return ResponseEntity.ok(userDetail)
     }
+    @PostMapping("/{id}/change-password")
+    fun changePassword(
+        @PathVariable id: Long,
+        @RequestParam newPassword: String
+    ): ResponseEntity<Unit> {
+        userDetailService.changePassword(id, newPassword)
+        return ResponseEntity.ok().build()
+    }
 
+    @PostMapping("/{id}/change-email")
+    fun changeEmail(
+        @PathVariable id: Long,
+        @RequestParam newEmail: String
+    ): ResponseEntity<Unit> {
+        userDetailService.changeEmail(id, newEmail)
+        return ResponseEntity.ok().build()
+    }
     @ExceptionHandler
     fun handleException(e: UserException): ResponseEntity<Unit> {
         val status =
