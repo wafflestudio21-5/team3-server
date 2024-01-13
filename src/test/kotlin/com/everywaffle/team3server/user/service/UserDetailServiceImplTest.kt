@@ -14,8 +14,6 @@ class UserDetailServiceImplTest {
     private lateinit var userRepository: UserRepository
     private lateinit var userDetailRepository: UserDetailRepository
     private lateinit var userDetailService: UserDetailServiceImpl
-
-
     @BeforeEach
     fun setUp() {
         userRepository = Mockito.mock(UserRepository::class.java)
@@ -34,10 +32,6 @@ class UserDetailServiceImplTest {
         Mockito.`when`(userDetailRepository.save(ArgumentMatchers.any(UserDetailEntity::class.java)))
             .thenAnswer { invocation -> invocation.getArgument(0) }
     }
-
-
-
-
     @Test
     fun testChangePassword() {
         val newPassword = "newPassword"
