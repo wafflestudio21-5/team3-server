@@ -6,4 +6,9 @@ class UserRequest {
         val password: String,
         val email: String,
     )
+
+    data class WithdrawalRequest(
+        val password: String
+    )
+
 }

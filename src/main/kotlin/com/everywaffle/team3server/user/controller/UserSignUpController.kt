@@ -1,10 +1,13 @@
 package com.everywaffle.team3server.user.controller
 
+import com.everywaffle.team3server.auth.JwtAuthenticationException
+import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.dto.LocalSignInRequest
 import com.everywaffle.team3server.user.dto.LocalSignInResponse
 import com.everywaffle.team3server.user.dto.UserRequest
 import com.everywaffle.team3server.user.dto.UserResponse
 import com.everywaffle.team3server.user.service.*
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
@@ -16,7 +19,10 @@ import org.springframework.web.bind.annotation.RestController
 class UserSignUpController(
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
+    private val userWithdrawalService: UserWithdrawalService,
+    private val jwtTokenProvider: JwtTokenProvider
 ) {
+
     @PostMapping("/api/signin")
     fun signin(
         @RequestBody request: LocalSignInRequest,
@@ -31,6 +37,18 @@ class UserSignUpController(
     ): UserResponse.SignUpResponse {
         val response = userSignUpService.signUp(request.userName, request.password, request.email)
         return response
+    }
+
+    @GetMapping("/api/withdrawal")
+    fun withdrawal(
+        @RequestBody withdrawalRequest: UserRequest.WithdrawalRequest,
+        request: HttpServletRequest
+    ) {
+        val token = request.getHeader("Authorization").substring(7)
+        val username = jwtTokenProvider.getAuthentication(token).principal as String
+
+        userWithdrawalService.withdrawal(username, withdrawalRequest.password)
+        // -> redirect to logout page afterward
     }
 
     @GetMapping("/api/signup/kakao")
@@ -65,4 +83,10 @@ class UserSignUpController(
             }
         return ResponseEntity.status(status).build()
     }
+
+    @ExceptionHandler
+    fun handleJwtAuthenticationException(e: JwtAuthenticationException): ResponseEntity<Unit> {
+        return ResponseEntity.status(401).build()
+    }
+
 }
