@@ -12,4 +12,12 @@ interface UserDetailService {
     fun getUserDetail(
         userId: Long
     ): UserDetailResponse.UserDetail
+    fun changePassword(
+        userId: Long,
+        newPassword: String
+    ): UserDetailResponse.UserDetail
+    fun changeEmail(
+        userId: Long,
+        newEmail: String
+    ): UserDetailResponse.UserDetail
 }
