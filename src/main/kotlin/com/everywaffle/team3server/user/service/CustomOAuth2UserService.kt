@@ -28,7 +28,7 @@ class CustomOAuth2UserService(
             val existingUser = userRepository.findByUserName(userName)
             if (existingUser == null) {
                 // 사용자가 존재하지 않으면 회원가입
-                userSignUpService.signUp(userName = userName, password = "", email = "")
+                userSignUpService.signUp(userName = userName, password = "0000", email = "")
                 val newUser = userRepository.findByUserName(userName)
                 if (newUser != null) {
                     userSignInService.localSignIn(newUser.userName, newUser.password)
