@@ -52,10 +52,8 @@ class JwtTokenProvider(
                 .claims["username"]!!
                 .asString()
             return UsernamePasswordAuthenticationToken(username, token)
-
         } catch (e: RuntimeException) {
             throw JwtAuthenticationException("Failed to get authentication")
         }
     }
-
 }

@@ -10,6 +10,6 @@ class SignInUserNameNotFoundException : UserException()
 
 class SignInInvalidPasswordException : UserException()
 
-class WithdrawalInvalidPasswordException: UserException()
+class WithdrawalInvalidPasswordException : UserException()
 
 class UserNotFoundException : UserException()

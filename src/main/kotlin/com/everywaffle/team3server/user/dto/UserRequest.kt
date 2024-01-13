@@ -10,5 +10,4 @@ class UserRequest {
     data class WithdrawalRequest(
         val password: String
     )
-
 }
