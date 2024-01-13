@@ -4,14 +4,7 @@ import com.everywaffle.team3server.user.dto.LocalSignInRequest
 import com.everywaffle.team3server.user.dto.LocalSignInResponse
 import com.everywaffle.team3server.user.dto.UserRequest
 import com.everywaffle.team3server.user.dto.UserResponse
-import com.everywaffle.team3server.user.service.SignInInvalidPasswordException
-import com.everywaffle.team3server.user.service.SignInUserNameNotFoundException
-import com.everywaffle.team3server.user.service.SignUpEmailConflictException
-import com.everywaffle.team3server.user.service.SignUpUsernameConflictException
-import com.everywaffle.team3server.user.service.UserException
-import com.everywaffle.team3server.user.service.UserNotFoundException
-import com.everywaffle.team3server.user.service.UserSignInService
-import com.everywaffle.team3server.user.service.UserSignUpService
+import com.everywaffle.team3server.user.service.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
@@ -67,7 +60,7 @@ class UserSignUpController(
     fun handleException(e: UserException): ResponseEntity<Unit> {
         val status =
             when (e) {
-                is SignInUserNameNotFoundException, is SignInInvalidPasswordException, is UserNotFoundException -> 404
+                is SignInUserNameNotFoundException, is SignInInvalidPasswordException, is UserNotFoundException, is WithdrawalInvalidPasswordException -> 404
                 is SignUpUsernameConflictException, is SignUpEmailConflictException -> 409
             }
         return ResponseEntity.status(status).build()
