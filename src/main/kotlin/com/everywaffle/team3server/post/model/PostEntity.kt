@@ -22,8 +22,8 @@ class PostEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     val user: UserEntity,
-    val title: String,
-    val content: String,
+    var title: String,
+    var content: String,
     @Enumerated(EnumType.STRING)
     val category: Category,
     @Temporal(TemporalType.TIMESTAMP)
