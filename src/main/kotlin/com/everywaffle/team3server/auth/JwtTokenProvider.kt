@@ -4,6 +4,8 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import java.time.Instant
 import java.util.Date
@@ -38,6 +40,20 @@ class JwtTokenProvider(
             return true
         } catch (e: JWTVerificationException) {
             throw JwtValidationException("Failed to validate JWT: ${e.message}")
+        }
+    }
+
+    fun getAuthentication(token: String): Authentication {
+
+        try {
+            val username = JWT.require(algorithm)
+                .build()
+                .verify(token)
+                .claims["username"]!!
+                .asString()
+            return UsernamePasswordAuthenticationToken(username, token)
+        } catch (e: RuntimeException) {
+            throw JwtAuthenticationException("Failed to get authentication")
         }
     }
 }
