@@ -31,9 +31,11 @@ class PostServiceImpl(
         val savedPost = postRepository.save(newPost)
         return PostResponse.PostDetail(
             id = savedPost.postId,
+            userId = savedPost.user.userId,
             title = savedPost.title,
             content = savedPost.content,
             category = savedPost.category,
+            createdAt = savedPost.createdAt,
         )
     }
 
@@ -53,9 +55,11 @@ class PostServiceImpl(
         val updatedPost = postRepository.save(existingPost)
         return PostResponse.PostDetail(
             id = updatedPost.postId,
+            userId = updatedPost.user.userId,
             title = updatedPost.title,
             content = updatedPost.content,
             category = updatedPost.category,
+            createdAt = updatedPost.createdAt,
         )
     }
 
@@ -72,9 +76,11 @@ class PostServiceImpl(
         return postRepository.findById(postId).map { post ->
             PostResponse.PostDetail(
                 id = post.postId,
+                userId = post.user.userId,
                 title = post.title,
                 content = post.content,
                 category = post.category,
+                createdAt = post.createdAt,
             )
         }.orElse(null)
     }
