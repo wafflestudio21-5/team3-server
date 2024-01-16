@@ -36,6 +36,7 @@ class PostServiceImpl(
             content = savedPost.content,
             category = savedPost.category,
             createdAt = savedPost.createdAt,
+            likes = savedPost.likes,
         )
     }
 
@@ -60,6 +61,7 @@ class PostServiceImpl(
             content = updatedPost.content,
             category = updatedPost.category,
             createdAt = updatedPost.createdAt,
+            likes = updatedPost.likes,
         )
     }
 
@@ -81,6 +83,7 @@ class PostServiceImpl(
                 content = post.content,
                 category = post.category,
                 createdAt = post.createdAt,
+                likes = post.likes,
             )
         }.orElse(null)
     }
