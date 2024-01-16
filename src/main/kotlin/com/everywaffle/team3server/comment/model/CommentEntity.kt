@@ -24,11 +24,11 @@ class CommentEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     val user: UserEntity,
-    val content: String,
+    var content: String,
     @Temporal(TemporalType.TIMESTAMP)
     val createdAt: Date = Date(),
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parentCommentId", referencedColumnName = "commentId")
     val parentComment: CommentEntity? = null,
-    val likes: Int = 0,
+    var likes: Int = 0,
 )
