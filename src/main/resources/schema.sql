@@ -1,4 +1,5 @@
 -- Drop tables if they already exist
+DROP TABLE IF EXISTS scraps;
 DROP TABLE IF EXISTS comment_likes;
 DROP TABLE IF EXISTS post_likes;
 DROP TABLE IF EXISTS comments;
@@ -68,5 +69,15 @@ CREATE TABLE comment_likes (
     user_id BIGINT NOT NULL,
     UNIQUE (comment_id, user_id),
     FOREIGN KEY (comment_id) REFERENCES comments(comment_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+-- Scraps Table
+CREATE TABLE scraps (
+    scrap_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    post_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    UNIQUE (post_id, user_id),
+    FOREIGN KEY (post_id) REFERENCES posts(post_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

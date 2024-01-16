@@ -11,5 +11,6 @@ class PostResponse {
         val content: String,
         val category: Category,
         val createdAt: Date,
+        val likes: Int,
     )
 }
