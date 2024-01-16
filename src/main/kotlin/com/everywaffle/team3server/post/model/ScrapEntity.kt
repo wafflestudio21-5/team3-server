@@ -20,7 +20,7 @@ import jakarta.persistence.UniqueConstraint
 class ScrapEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val postLikeId: Long = 0,
+    val scrapId: Long = 0,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId", referencedColumnName = "postId")
     val post: PostEntity,
