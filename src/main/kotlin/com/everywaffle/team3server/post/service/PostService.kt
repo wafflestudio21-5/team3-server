@@ -3,6 +3,8 @@ package com.everywaffle.team3server.post.service
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
 import com.everywaffle.team3server.post.model.Category
+import org.springframework.data.domain.Page
+import java.awt.print.Pageable
 
 interface PostService {
     fun createPost(request: PostRequest.CreateOrUpdatePost): PostResponse.PostDetail
@@ -16,7 +18,7 @@ interface PostService {
 
     fun getPostById(postId: Long): PostResponse.PostDetail?
 
-    fun getCategoryPost(category: Category): List<PostResponse.PostDetail>
+    fun getCategoryPost(category: Category, page: Int, size: Int): Page<PostResponse.PostDetail>
 
     fun getTrendingPost(): List<PostResponse.PostDetail>
 }
