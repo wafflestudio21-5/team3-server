@@ -102,4 +102,18 @@ class PostServiceImpl(
             )
         }
     }
+
+    override fun getTrendingPost(): List<PostResponse.PostDetail> {
+        return postRepository.findAll().sortedByDescending { it.likes }.map { post ->
+            PostResponse.PostDetail(
+                id = post.postId,
+                userId = post.user.userId,
+                title = post.title,
+                content = post.content,
+                category = post.category,
+                createdAt = post.createdAt,
+                likes = post.likes,
+            )
+        }
+    }
 }

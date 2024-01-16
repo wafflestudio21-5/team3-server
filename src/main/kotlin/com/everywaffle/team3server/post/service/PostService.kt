@@ -17,4 +17,6 @@ interface PostService {
     fun getPostById(postId: Long): PostResponse.PostDetail?
 
     fun getCategoryPost(category: Category): List<PostResponse.PostDetail>
+
+    fun getTrendingPost(): List<PostResponse.PostDetail>
 }

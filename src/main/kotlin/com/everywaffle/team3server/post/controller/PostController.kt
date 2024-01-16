@@ -61,6 +61,12 @@ class PostController(private val postService: PostService) {
         return ResponseEntity.ok(postList)
     }
 
+    @GetMapping("/trending")
+    fun getTrendingPost(): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.getTrendingPost()
+        return ResponseEntity.ok(postList)
+    }
+
     @ExceptionHandler
     fun handlePostException(e: PostException): ResponseEntity<Unit> {
         val status =
