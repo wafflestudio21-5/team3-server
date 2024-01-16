@@ -2,6 +2,7 @@ package com.everywaffle.team3server.post.controller
 
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
+import com.everywaffle.team3server.post.model.Category
 import com.everywaffle.team3server.post.service.PostException
 import com.everywaffle.team3server.post.service.PostNotFoundException
 import com.everywaffle.team3server.post.service.PostService
@@ -50,6 +51,14 @@ class PostController(private val postService: PostService) {
     ): ResponseEntity<PostResponse.PostDetail> {
         val post = postService.getPostById(postId) ?: throw PostNotFoundException(postId)
         return ResponseEntity.ok(post)
+    }
+
+    @GetMapping("/category/{category}")
+    fun getCategoryPost(
+        @PathVariable category: Category,
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.getCategoryPost(category)
+        return ResponseEntity.ok(postList)
     }
 
     @ExceptionHandler

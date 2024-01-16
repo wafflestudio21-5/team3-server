@@ -2,6 +2,7 @@ package com.everywaffle.team3server.post.service
 
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
+import com.everywaffle.team3server.post.model.Category
 import com.everywaffle.team3server.post.model.PostEntity
 import com.everywaffle.team3server.post.repository.PostRepository
 import com.everywaffle.team3server.user.repository.UserRepository
@@ -86,5 +87,19 @@ class PostServiceImpl(
                 likes = post.likes,
             )
         }.orElse(null)
+    }
+
+    override fun getCategoryPost(category: Category): List<PostResponse.PostDetail> {
+        return postRepository.findByCategory(category).map { post ->
+            PostResponse.PostDetail(
+                id = post.postId,
+                userId = post.user.userId,
+                title = post.title,
+                content = post.content,
+                category = post.category,
+                createdAt = post.createdAt,
+                likes = post.likes,
+            )
+        }
     }
 }
