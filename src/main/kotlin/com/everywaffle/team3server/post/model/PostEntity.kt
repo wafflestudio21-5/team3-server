@@ -28,5 +28,5 @@ class PostEntity(
     val category: Category,
     @Temporal(TemporalType.TIMESTAMP)
     val createdAt: Date = Date(),
-    val likes: Int = 0,
+    var likes: Int = 0,
 )
