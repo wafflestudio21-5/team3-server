@@ -12,4 +12,6 @@ interface CommentService {
     ): CommentResponse.CommentDetail
 
     fun deleteComment(commentId: Long)
+
+    fun getCommentsByPostId(postId: Long): List<CommentResponse.CommentDetailList>
 }
