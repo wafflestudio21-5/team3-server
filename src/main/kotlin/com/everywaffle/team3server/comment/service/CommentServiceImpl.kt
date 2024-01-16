@@ -49,6 +49,7 @@ class CommentServiceImpl(
             content = savedComment.content,
             parentCommentId = savedComment.parentComment?.commentId,
             createdAt = savedComment.createdAt,
+            likes = savedComment.likes,
         )
     }
 
@@ -76,6 +77,7 @@ class CommentServiceImpl(
             content = updatedComment.content,
             parentCommentId = updatedComment.parentComment?.commentId,
             createdAt = updatedComment.createdAt,
+            likes = updatedComment.likes,
         )
     }
 
@@ -86,5 +88,49 @@ class CommentServiceImpl(
                 CommentNotFoundException(commentId)
             }
         commentRepository.delete(comment)
+    }
+
+    @Transactional
+    override fun getCommentsByPostId(postId: Long): List<CommentResponse.CommentDetailList> {
+        val comments = commentRepository.findByPostPostIdOrderByCreatedAt(postId)
+        val commentMap = comments.associateBy { it.commentId }
+        val childCommentsMap = mutableMapOf<Long, MutableList<CommentResponse.CommentDetail>>()
+
+        for (comment in comments) {
+            if (comment.parentComment
+                != null
+            ) {
+                val parentCommentId = comment.parentComment.commentId
+                val childCommentDetail =
+                    CommentResponse.CommentDetail(
+                        id = comment.commentId,
+                        userId = comment.user.userId,
+                        postId = comment.post.postId,
+                        content = comment.content,
+                        createdAt = comment.createdAt,
+                        parentCommentId = parentCommentId,
+                        likes = comment.likes,
+                    )
+                childCommentsMap.computeIfAbsent(parentCommentId) { mutableListOf() }.add(childCommentDetail)
+            }
+        }
+
+        val result = mutableListOf<CommentResponse.CommentDetailList>()
+        for (comment in comments) {
+            if (comment.parentComment == null) {
+                val commentDetailInstance =
+                    CommentResponse.CommentDetailList(
+                        id = comment.commentId,
+                        userId = comment.user.userId,
+                        postId = comment.post.postId,
+                        content = comment.content,
+                        createdAt = comment.createdAt,
+                        childComments = childCommentsMap[comment.commentId] ?: listOf(),
+                        likes = comment.likes,
+                    )
+                result.add(commentDetailInstance)
+            }
+        }
+        return result
     }
 }
