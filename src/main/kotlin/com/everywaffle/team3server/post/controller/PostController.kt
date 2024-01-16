@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api/post")
 class PostController(private val postService: PostService) {
     @PostMapping
     fun createPost(
