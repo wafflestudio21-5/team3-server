@@ -3,13 +3,9 @@ package com.everywaffle.team3server.post.controller
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
 import com.everywaffle.team3server.post.model.Category
-import com.everywaffle.team3server.post.model.PostEntity
 import com.everywaffle.team3server.post.service.PostException
 import com.everywaffle.team3server.post.service.PostNotFoundException
 import com.everywaffle.team3server.post.service.PostService
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Sort
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -74,6 +70,27 @@ class PostController(private val postService: PostService) {
         @RequestParam(defaultValue = "10") size: Int,
     ): ResponseEntity<List<PostResponse.PostDetail>> {
         val postList = postService.getTrendingPost(page, size)
+        return ResponseEntity.ok(postList.content)
+    }
+
+    @GetMapping("/search/{catagory}")
+    fun searchPost(
+        @PathVariable category: Category,
+        @RequestParam(required = true) keyword: String,
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int,
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.searchPost(keyword, category, page, size)
+        return ResponseEntity.ok(postList.content)
+    }
+
+    @GetMapping("/search")
+    fun searchPost(
+        @RequestParam(required = true) keyword: String,
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int,
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.searchPost(keyword, null, page, size)
         return ResponseEntity.ok(postList.content)
     }
 

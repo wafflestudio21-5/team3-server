@@ -121,4 +121,33 @@ class PostServiceImpl(
             )
         }
     }
+
+    override fun searchPost(keyword: String, category: Category?, page: Int, size: Int): Page<PostResponse.PostDetail> {
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
+        if (category == null) {
+            return postRepository.findAllByTitleContainingOrContentContaining(keyword, keyword, pageable).map { post ->
+                PostResponse.PostDetail(
+                    id = post.postId,
+                    userId = post.user.userId,
+                    title = post.title,
+                    content = post.content,
+                    category = post.category,
+                    createdAt = post.createdAt,
+                    likes = post.likes,
+                )
+            }
+        } else {
+            return postRepository.findAllByCategoryAndTitleContainingOrContentContaining(category, keyword, keyword, pageable).map { post ->
+                PostResponse.PostDetail(
+                    id = post.postId,
+                    userId = post.user.userId,
+                    title = post.title,
+                    content = post.content,
+                    category = post.category,
+                    createdAt = post.createdAt,
+                    likes = post.likes,
+                )
+            }
+        }
+    }
 }

@@ -8,4 +8,17 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface PostRepository : JpaRepository<PostEntity, Long> {
     fun findAllByCategory(category: Category, pageable: PageRequest): Page<PostEntity>
+
+    fun findAllByCategoryAndTitleContainingOrContentContaining(
+        category: Category,
+        titleKeyword: String,
+        contentKeyword: String,
+        pageable: PageRequest
+    ): Page<PostEntity>
+
+    fun findAllByTitleContainingOrContentContaining(
+        titleKeyword: String,
+        contentKeyword: String,
+        pageable: PageRequest
+    ): Page<PostEntity>
 }
