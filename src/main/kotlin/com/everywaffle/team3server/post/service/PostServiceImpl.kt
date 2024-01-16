@@ -92,8 +92,8 @@ class PostServiceImpl(
         }.orElse(null)
     }
 
-    override fun getCategoryPost(category: Category, pageNo: Int, size: Int): Page<PostResponse.PostDetail> {
-        val pageable = PageRequest.of(pageNo, size, Sort.by(Sort.Direction.DESC, "createdAt"))
+    override fun getCategoryPost(category: Category, page: Int, size: Int): Page<PostResponse.PostDetail> {
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
         return postRepository.findAllByCategory(category, pageable).map { post ->
             PostResponse.PostDetail(
                 id = post.postId,
@@ -107,8 +107,9 @@ class PostServiceImpl(
         }
     }
 
-    override fun getTrendingPost(): List<PostResponse.PostDetail> {
-        return postRepository.findAll().sortedByDescending { it.likes }.map { post ->
+    override fun getTrendingPost(page: Int, size: Int): Page<PostResponse.PostDetail> {
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "likes"))
+        return postRepository.findAll(pageable).map { post ->
             PostResponse.PostDetail(
                 id = post.postId,
                 userId = post.user.userId,

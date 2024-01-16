@@ -20,5 +20,5 @@ interface PostService {
 
     fun getCategoryPost(category: Category, page: Int, size: Int): Page<PostResponse.PostDetail>
 
-    fun getTrendingPost(): List<PostResponse.PostDetail>
+    fun getTrendingPost(page: Int, size: Int): Page<PostResponse.PostDetail>
 }
