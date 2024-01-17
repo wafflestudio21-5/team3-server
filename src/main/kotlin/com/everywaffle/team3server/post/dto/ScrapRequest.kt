@@ -4,6 +4,7 @@ import com.everywaffle.team3server.post.model.Category
 
 class ScrapRequest {
     data class ScrapPost(
-        val postId: Long
+        val postId: Long,
+        val userId: Long,
     )
 }

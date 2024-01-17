@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/post")
 class PostScrapController(private val scrapService: ScrapServiceImpl) {
     @PostMapping("/scrap")
-    fun scrapPost(@RequestBody scrapRequest: ScrapRequest.ScrapPost,
-                  @AuthenticationPrincipal userDetails: CustomUserDetails): ResponseEntity<ScrapResponse.ScrapDetail> {
-        val scrapDetail = scrapService.create(scrapRequest.postId, userDetails.getUser().userId)
+    fun scrapPost(@RequestBody scrapRequest: ScrapRequest.ScrapPost): ResponseEntity<ScrapResponse.ScrapDetail> {
+        val scrapDetail = scrapService.create(scrapRequest.postId, scrapRequest.userId)
         return ResponseEntity.ok(scrapDetail)
     }
 }

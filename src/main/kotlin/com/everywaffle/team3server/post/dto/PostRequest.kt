@@ -9,4 +9,7 @@ class PostRequest {
         val content: String,
         val category: Category,
     )
+    data class CreateOrUpdatePostLike(
+        val userId: Long,
+    )
 }

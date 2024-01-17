@@ -8,4 +8,7 @@ class CommentRequest {
         val parentCommentId: Long? = null,
         val likes: Int,
     )
+    data class CreateOrUpdateCommentLike(
+        val userId: Long,
+    )
 }
