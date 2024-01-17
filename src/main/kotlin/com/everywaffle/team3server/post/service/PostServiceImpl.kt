@@ -2,11 +2,15 @@ package com.everywaffle.team3server.post.service
 
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
+import com.everywaffle.team3server.post.model.Category
 import com.everywaffle.team3server.post.model.PostEntity
 import com.everywaffle.team3server.post.repository.PostRepository
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 @Service
@@ -86,5 +90,64 @@ class PostServiceImpl(
                 likes = post.likes,
             )
         }.orElse(null)
+    }
+
+    override fun getCategoryPost(category: Category, page: Int, size: Int): Page<PostResponse.PostDetail> {
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
+        return postRepository.findAllByCategory(category, pageable).map { post ->
+            PostResponse.PostDetail(
+                id = post.postId,
+                userId = post.user.userId,
+                title = post.title,
+                content = post.content,
+                category = post.category,
+                createdAt = post.createdAt,
+                likes = post.likes,
+            )
+        }
+    }
+
+    override fun getTrendingPost(page: Int, size: Int): Page<PostResponse.PostDetail> {
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "likes"))
+        return postRepository.findAll(pageable).map { post ->
+            PostResponse.PostDetail(
+                id = post.postId,
+                userId = post.user.userId,
+                title = post.title,
+                content = post.content,
+                category = post.category,
+                createdAt = post.createdAt,
+                likes = post.likes,
+            )
+        }
+    }
+
+    override fun searchPost(keyword: String, category: Category?, page: Int, size: Int): Page<PostResponse.PostDetail> {
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
+        if (category == null) {
+            return postRepository.findAllByTitleContainingOrContentContaining(keyword, keyword, pageable).map { post ->
+                PostResponse.PostDetail(
+                    id = post.postId,
+                    userId = post.user.userId,
+                    title = post.title,
+                    content = post.content,
+                    category = post.category,
+                    createdAt = post.createdAt,
+                    likes = post.likes,
+                )
+            }
+        } else {
+            return postRepository.findAllByCategoryAndTitleContainingOrContentContaining(category, keyword, keyword, pageable).map { post ->
+                PostResponse.PostDetail(
+                    id = post.postId,
+                    userId = post.user.userId,
+                    title = post.title,
+                    content = post.content,
+                    category = post.category,
+                    createdAt = post.createdAt,
+                    likes = post.likes,
+                )
+            }
+        }
     }
 }

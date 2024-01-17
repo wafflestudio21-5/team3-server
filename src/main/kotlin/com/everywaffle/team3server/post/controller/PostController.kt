@@ -2,6 +2,7 @@ package com.everywaffle.team3server.post.controller
 
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
+import com.everywaffle.team3server.post.model.Category
 import com.everywaffle.team3server.post.service.PostException
 import com.everywaffle.team3server.post.service.PostNotFoundException
 import com.everywaffle.team3server.post.service.PostService
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -50,6 +52,46 @@ class PostController(private val postService: PostService) {
     ): ResponseEntity<PostResponse.PostDetail> {
         val post = postService.getPostById(postId) ?: throw PostNotFoundException(postId)
         return ResponseEntity.ok(post)
+    }
+
+    @GetMapping("/category/{category}")
+    fun getCategoryPost(
+        @PathVariable category: Category,
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int,
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.getCategoryPost(category, page, size)
+        return ResponseEntity.ok(postList.content)
+    }
+
+    @GetMapping("/trending")
+    fun getTrendingPost(
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int,
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.getTrendingPost(page, size)
+        return ResponseEntity.ok(postList.content)
+    }
+
+    @GetMapping("/search/{catagory}")
+    fun searchPost(
+        @PathVariable category: Category,
+        @RequestParam(required = true) keyword: String,
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int,
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.searchPost(keyword, category, page, size)
+        return ResponseEntity.ok(postList.content)
+    }
+
+    @GetMapping("/search")
+    fun searchPost(
+        @RequestParam(required = true) keyword: String,
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int,
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.searchPost(keyword, null, page, size)
+        return ResponseEntity.ok(postList.content)
     }
 
     @ExceptionHandler

@@ -8,6 +8,24 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
 interface PostRepository : JpaRepository<PostEntity, Long> {
+    fun findAllByCategory(
+        category: Category,
+        pageable: PageRequest,
+    ): Page<PostEntity>
+
+    fun findAllByCategoryAndTitleContainingOrContentContaining(
+        category: Category,
+        titleKeyword: String,
+        contentKeyword: String,
+        pageable: PageRequest,
+    ): Page<PostEntity>
+
+    fun findAllByTitleContainingOrContentContaining(
+        titleKeyword: String,
+        contentKeyword: String,
+        pageable: PageRequest,
+    ): Page<PostEntity>
+
     fun findTopByCategoryOrderByCreatedAtDesc(category: Category): PostEntity?
 
     fun findTop2ByLikesGreaterThanOrderByCreatedAtDesc(likesThreshold: Int): List<PostEntity>
