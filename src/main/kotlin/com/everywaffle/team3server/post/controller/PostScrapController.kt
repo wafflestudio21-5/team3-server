@@ -3,9 +3,7 @@ package com.everywaffle.team3server.post.controller
 import com.everywaffle.team3server.post.dto.ScrapRequest
 import com.everywaffle.team3server.post.dto.ScrapResponse
 import com.everywaffle.team3server.post.service.ScrapServiceImpl
-import com.everywaffle.team3server.user.detail.CustomUserDetails
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
