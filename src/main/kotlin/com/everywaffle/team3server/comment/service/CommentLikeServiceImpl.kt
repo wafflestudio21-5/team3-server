@@ -3,7 +3,6 @@ package com.everywaffle.team3server.comment.service
 import com.everywaffle.team3server.comment.model.CommentLikeEntity
 import com.everywaffle.team3server.comment.repository.CommentLikeRepository
 import com.everywaffle.team3server.comment.repository.CommentRepository
-import com.everywaffle.team3server.post.service.PostNeverLikedException
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import org.springframework.stereotype.Service
@@ -42,5 +41,4 @@ class CommentLikeServiceImpl(
 
         commentLikeRepository.delete(like)
     }
-
 }

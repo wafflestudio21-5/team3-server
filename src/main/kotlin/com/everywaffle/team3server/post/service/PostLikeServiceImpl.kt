@@ -41,5 +41,4 @@ class PostLikeServiceImpl(
 
         postRepository.decrementLikes(postId)
     }
-
 }
