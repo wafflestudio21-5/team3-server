@@ -14,6 +14,8 @@ class CustomUserDetails(
 
     override fun getUsername(): String = user.userName
 
+    fun getUser(): UserEntity = user
+
     override fun isAccountNonExpired(): Boolean = true
 
     override fun isAccountNonLocked(): Boolean = true

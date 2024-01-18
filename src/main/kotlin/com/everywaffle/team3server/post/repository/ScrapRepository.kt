@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
 interface ScrapRepository : JpaRepository<ScrapEntity, Long> {
+    fun findByPostPostIdAndUserUserId(postId: Long, userId: Long): ScrapEntity?
     @Query("select s from scraps s where s.user.userId = :userId")
     fun findByUserId(userId: Long, pageable: PageRequest): Page<ScrapEntity>
 }
