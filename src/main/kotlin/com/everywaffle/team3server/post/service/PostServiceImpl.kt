@@ -1,10 +1,12 @@
 package com.everywaffle.team3server.post.service
 
+import com.everywaffle.team3server.comment.repository.CommentRepository
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
 import com.everywaffle.team3server.post.model.Category
 import com.everywaffle.team3server.post.model.PostEntity
 import com.everywaffle.team3server.post.repository.PostRepository
+import com.everywaffle.team3server.post.repository.ScrapRepository
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import jakarta.transaction.Transactional
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service
 class PostServiceImpl(
     private val postRepository: PostRepository,
     private val userRepository: UserRepository,
+    private val scrapRepository: ScrapRepository,
+    private val commentRepository: CommentRepository,
 ) : PostService {
     @Transactional
     override fun createPost(request: PostRequest.CreateOrUpdatePost): PostResponse.PostDetail {
@@ -41,6 +45,8 @@ class PostServiceImpl(
             category = savedPost.category,
             createdAt = savedPost.createdAt,
             likes = savedPost.likes,
+            scraps = 0,
+            comments = 0,
         )
     }
 
@@ -58,6 +64,8 @@ class PostServiceImpl(
             content = request.content
         }
         val updatedPost = postRepository.save(existingPost)
+        val scrapsCount = scrapRepository.countByPost(updatedPost)
+        val commentsCount = commentRepository.countByPost(updatedPost)
         return PostResponse.PostDetail(
             id = updatedPost.postId,
             userId = updatedPost.user.userId,
@@ -66,6 +74,8 @@ class PostServiceImpl(
             category = updatedPost.category,
             createdAt = updatedPost.createdAt,
             likes = updatedPost.likes,
+            scraps = scrapsCount,
+            comments = commentsCount,
         )
     }
 
@@ -80,6 +90,8 @@ class PostServiceImpl(
 
     override fun getPostById(postId: Long): PostResponse.PostDetail? {
         return postRepository.findById(postId).map { post ->
+            val scrapsCount = scrapRepository.countByPost(post)
+            val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
                 id = post.postId,
                 userId = post.user.userId,
@@ -88,13 +100,21 @@ class PostServiceImpl(
                 category = post.category,
                 createdAt = post.createdAt,
                 likes = post.likes,
+                scraps = scrapsCount,
+                comments = commentsCount,
             )
         }.orElse(null)
     }
 
-    override fun getCategoryPost(category: Category, page: Int, size: Int): Page<PostResponse.PostDetail> {
+    override fun getCategoryPost(
+        category: Category,
+        page: Int,
+        size: Int,
+    ): Page<PostResponse.PostDetail> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
         return postRepository.findAllByCategory(category, pageable).map { post ->
+            val scrapsCount = scrapRepository.countByPost(post)
+            val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
                 id = post.postId,
                 userId = post.user.userId,
@@ -103,13 +123,20 @@ class PostServiceImpl(
                 category = post.category,
                 createdAt = post.createdAt,
                 likes = post.likes,
+                scraps = scrapsCount,
+                comments = commentsCount,
             )
         }
     }
 
-    override fun getTrendingPost(page: Int, size: Int): Page<PostResponse.PostDetail> {
+    override fun getTrendingPost(
+        page: Int,
+        size: Int,
+    ): Page<PostResponse.PostDetail> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "likes"))
         return postRepository.findAll(pageable).map { post ->
+            val scrapsCount = scrapRepository.countByPost(post)
+            val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
                 id = post.postId,
                 userId = post.user.userId,
@@ -118,14 +145,23 @@ class PostServiceImpl(
                 category = post.category,
                 createdAt = post.createdAt,
                 likes = post.likes,
+                scraps = scrapsCount,
+                comments = commentsCount,
             )
         }
     }
 
-    override fun searchPost(keyword: String, category: Category?, page: Int, size: Int): Page<PostResponse.PostDetail> {
+    override fun searchPost(
+        keyword: String,
+        category: Category?,
+        page: Int,
+        size: Int,
+    ): Page<PostResponse.PostDetail> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
         if (category == null) {
             return postRepository.findAllByTitleContainingOrContentContaining(keyword, keyword, pageable).map { post ->
+                val scrapsCount = scrapRepository.countByPost(post)
+                val commentsCount = commentRepository.countByPost(post)
                 PostResponse.PostDetail(
                     id = post.postId,
                     userId = post.user.userId,
@@ -134,10 +170,14 @@ class PostServiceImpl(
                     category = post.category,
                     createdAt = post.createdAt,
                     likes = post.likes,
+                    scraps = scrapsCount,
+                    comments = commentsCount,
                 )
             }
         } else {
             return postRepository.findAllByCategoryAndTitleContainingOrContentContaining(category, keyword, keyword, pageable).map { post ->
+                val scrapsCount = scrapRepository.countByPost(post)
+                val commentsCount = commentRepository.countByPost(post)
                 PostResponse.PostDetail(
                     id = post.postId,
                     userId = post.user.userId,
@@ -146,6 +186,8 @@ class PostServiceImpl(
                     category = post.category,
                     createdAt = post.createdAt,
                     likes = post.likes,
+                    scraps = scrapsCount,
+                    comments = commentsCount,
                 )
             }
         }
