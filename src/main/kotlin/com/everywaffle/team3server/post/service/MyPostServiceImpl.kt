@@ -13,12 +13,17 @@ import org.springframework.stereotype.Service
 class MyPostServiceImpl(
     private val scrapRepository: ScrapRepository,
     private val postRepository: PostRepository,
-    private val commentRepository: CommentRepository
+    private val commentRepository: CommentRepository,
 ) : MyPostService {
-
-    override fun getMyPosts(userId: Long, page: Int, size: Int): Page<PostResponse.PostDetail> {
+    override fun getMyPosts(
+        userId: Long,
+        page: Int,
+        size: Int,
+    ): Page<PostResponse.PostDetail> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
         return postRepository.findByUserId(userId, pageable).map { post ->
+            val scrapsCount = scrapRepository.countByPost(post)
+            val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
                 id = post.postId,
                 userId = post.user.userId,
@@ -26,37 +31,57 @@ class MyPostServiceImpl(
                 content = post.content,
                 category = post.category,
                 createdAt = post.createdAt,
-                likes = post.likes
+                likes = post.likes,
+                scraps = scrapsCount,
+                comments = commentsCount,
             )
         }
     }
 
-    override fun getMyScrappedPosts(userId: Long, page: Int, size: Int): Page<PostResponse.PostDetail> {
+    override fun getMyScrappedPosts(
+        userId: Long,
+        page: Int,
+        size: Int,
+    ): Page<PostResponse.PostDetail> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
         return scrapRepository.findByUserId(userId, pageable).map { scrap ->
+            val post = scrap.post
+            val scrapsCount = scrapRepository.countByPost(post)
+            val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
-                id = scrap.post.postId,
-                userId = scrap.user.userId,
-                title = scrap.post.title,
-                content = scrap.post.content,
-                category = scrap.post.category,
-                createdAt = scrap.post.createdAt,
-                likes = scrap.post.likes
+                id = post.postId,
+                userId = post.user.userId,
+                title = post.title,
+                content = post.content,
+                category = post.category,
+                createdAt = post.createdAt,
+                likes = post.likes,
+                scraps = scrapsCount,
+                comments = commentsCount,
             )
         }
     }
 
-    override fun getMyCommentedPosts(userId: Long, page: Int, size: Int): Page<PostResponse.PostDetail> {
+    override fun getMyCommentedPosts(
+        userId: Long,
+        page: Int,
+        size: Int,
+    ): Page<PostResponse.PostDetail> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
         return commentRepository.findByUserId(userId, pageable).map { comment ->
+            val post = comment.post
+            val scrapsCount = scrapRepository.countByPost(post)
+            val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
-                id = comment.post.postId,
-                userId = comment.user.userId,
-                title = comment.post.title,
-                content = comment.post.content,
-                category = comment.post.category,
-                createdAt = comment.post.createdAt,
-                likes = comment.post.likes
+                id = post.postId,
+                userId = post.user.userId,
+                title = post.title,
+                content = post.content,
+                category = post.category,
+                createdAt = post.createdAt,
+                likes = post.likes,
+                scraps = scrapsCount,
+                comments = commentsCount,
             )
         }
     }
