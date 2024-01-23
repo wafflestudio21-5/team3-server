@@ -1,4 +1,6 @@
 -- Drop tables if they already exist
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS message_sessions;
 DROP TABLE IF EXISTS scraps;
 DROP TABLE IF EXISTS comment_likes;
 DROP TABLE IF EXISTS post_likes;
@@ -80,4 +82,24 @@ CREATE TABLE scraps (
     UNIQUE (post_id, user_id),
     FOREIGN KEY (post_id) REFERENCES posts(post_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+-- Message Sessions Table
+CREATE TABLE message_sessions (
+    session_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user1_id BIGINT NOT NULL,
+    user2_id BIGINT NOT NULL,
+    FOREIGN KEY (user1_id) REFERENCES users(user_id),
+    FOREIGN KEY (user2_id) REFERENCES users(user_id)
+);
+
+-- Messages Table
+CREATE TABLE messages (
+    message_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    session_id BIGINT NOT NULL,
+    sender_id BIGINT NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (session_id) REFERENCES message_sessions(session_id),
+    FOREIGN KEY (sender_id) REFERENCES users(user_id)
 );
