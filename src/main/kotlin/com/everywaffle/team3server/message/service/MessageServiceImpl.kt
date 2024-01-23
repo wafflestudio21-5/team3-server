@@ -65,7 +65,7 @@ class MessageServiceImpl(
     }
 
     override fun getMessageList(sessionId: Long): List<MessageResponse.MessageDetail> {
-        val messages = messageRepository.findBySessionId(sessionId)
+        val messages = messageRepository.findBySessionIdOrderByCreatedAtDesc(sessionId)
         return messages.map { message ->
             MessageResponse.MessageDetail(
                 messageId = message.id,
