@@ -19,6 +19,9 @@ class ScrapServiceImpl(
     }
 
     override fun create(postId: Long, userId: Long): ScrapResponse.ScrapDetail {
+        if (exists(postId, userId)) {
+            throw ScrapAlreadyExistsException(postId)
+        }
         val user = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
         val post = postRepository.findById(postId).orElseThrow { PostNotFoundException(postId) }
 
