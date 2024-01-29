@@ -31,7 +31,7 @@ spring:
       ddl-auto: update  # or 'create' if you want to create tables on startup
     show-sql: true
   flyway:
-    enabled: false  # Enable Flyway
+    enabled: true  # Enable Flyway
     locations: classpath:db/migration  # Location of migration scripts
     baseline-on-migrate: true  # Baseline an existing database, only creating the schema history table
     out-of-order: true  # Allow out-of-order migrations

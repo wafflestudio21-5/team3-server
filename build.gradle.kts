@@ -57,7 +57,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
     // Flyway
-    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-core:8.4.4")
+    implementation("org.flywaydb:flyway-mysql:8.4.4")
 }
 
 tasks.withType<KotlinCompile> {
