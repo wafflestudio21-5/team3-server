@@ -3,11 +3,9 @@ package com.everywaffle.team3server.post.controller
 import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
 import com.everywaffle.team3server.post.model.Category
-import com.everywaffle.team3server.post.service.LikeAlreadyExistsException
 import com.everywaffle.team3server.post.service.PostException
 import com.everywaffle.team3server.post.service.PostNotFoundException
 import com.everywaffle.team3server.post.service.PostService
-import com.everywaffle.team3server.post.service.ScrapAlreadyExistsException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -100,9 +98,7 @@ class PostController(private val postService: PostService) {
     fun handlePostException(e: PostException): ResponseEntity<Unit> {
         val status =
             when (e) {
-                is ScrapAlreadyExistsException, is LikeAlreadyExistsException -> 409 // 충돌
                 is PostNotFoundException -> 404
-                // 다른 PostException 서브클래스에 대한 처리를 여기에 추가할 수 있습니다.
                 else -> 404 // 기본적으로 처리되지 않은 예외에 대한 상태 코드
             }
         return ResponseEntity.status(status).build()

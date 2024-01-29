@@ -2,7 +2,9 @@ package com.everywaffle.team3server.comment.controller
 
 import com.everywaffle.team3server.comment.dto.CommentRequest
 import com.everywaffle.team3server.comment.service.CommentLikeService
+import com.everywaffle.team3server.comment.service.LikeAlreadyExistsException
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,5 +21,14 @@ class CommentLikeController(private val commentLikeService: CommentLikeService) 
     ): ResponseEntity<Void> {
         commentLikeService.create(commentId, request.userId)
         return ResponseEntity.ok().build()
+    }
+    @ExceptionHandler
+    fun handleLikeAlreadyExistsException(e: LikeAlreadyExistsException): ResponseEntity<String> {
+        val status =
+            when (e) {
+                is LikeAlreadyExistsException -> 409
+                else -> 500
+            }
+        return ResponseEntity.status(status).build()
     }
 }
