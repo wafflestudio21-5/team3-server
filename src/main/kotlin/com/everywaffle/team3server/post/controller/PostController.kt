@@ -73,8 +73,8 @@ class PostController(private val postService: PostService) {
         return ResponseEntity.ok(postList.content)
     }
 
-    @GetMapping("/search/{catagory}")
-    fun searchPost(
+    @GetMapping("/search/{category}")
+    fun searchCategoryPost(
         @PathVariable category: Category,
         @RequestParam(required = true) keyword: String,
         @RequestParam(defaultValue = "0") page: Int,
