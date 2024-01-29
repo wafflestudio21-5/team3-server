@@ -6,4 +6,6 @@ enum class Category {
     GRADUATE_BOARD,
     FRESHMAN_BOARD,
     INFO_BOARD,
+    ISSUE_BOARD,
+    MARKET_BOARD,
 }
