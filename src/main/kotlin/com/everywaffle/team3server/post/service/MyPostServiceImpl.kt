@@ -43,9 +43,8 @@ class MyPostServiceImpl(
         page: Int,
         size: Int,
     ): Page<PostResponse.PostDetail> {
-        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
-        return scrapRepository.findByUserId(userId, pageable).map { scrap ->
-            val post = scrap.post
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "post.createdAt"))
+        return scrapRepository.findScrappedPostByUserId(userId, pageable).map { post ->
             val scrapsCount = scrapRepository.countByPost(post)
             val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
@@ -67,9 +66,8 @@ class MyPostServiceImpl(
         page: Int,
         size: Int,
     ): Page<PostResponse.PostDetail> {
-        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"))
-        return commentRepository.findByUserId(userId, pageable).map { comment ->
-            val post = comment.post
+        val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "post.createdAt"))
+        return commentRepository.findDistinctCommentedPostByUserId(userId, pageable).map { post ->
             val scrapsCount = scrapRepository.countByPost(post)
             val commentsCount = commentRepository.countByPost(post)
             PostResponse.PostDetail(
@@ -81,7 +79,7 @@ class MyPostServiceImpl(
                 createdAt = post.createdAt,
                 likes = post.likes,
                 scraps = scrapsCount,
-                comments = commentsCount,
+                comments = commentsCount
             )
         }
     }
