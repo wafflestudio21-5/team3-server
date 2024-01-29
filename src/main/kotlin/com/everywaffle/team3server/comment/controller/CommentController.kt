@@ -4,7 +4,6 @@ import com.everywaffle.team3server.comment.dto.CommentRequest
 import com.everywaffle.team3server.comment.dto.CommentResponse
 import com.everywaffle.team3server.comment.service.CommentNotFoundException
 import com.everywaffle.team3server.comment.service.CommentService
-import com.everywaffle.team3server.comment.service.LikeAlreadyExistsException
 import com.everywaffle.team3server.post.service.PostNotFoundException
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import org.springframework.http.ResponseEntity
@@ -49,7 +48,6 @@ class CommentController(private val commentService: CommentService) {
     fun handleException(e: Exception): ResponseEntity<String> {
         val status =
             when (e) {
-                is LikeAlreadyExistsException -> 409
                 is CommentNotFoundException, is UserNotFoundException, is PostNotFoundException -> 404
                 else -> 500
             }
