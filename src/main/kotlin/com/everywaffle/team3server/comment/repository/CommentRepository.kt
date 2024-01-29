@@ -46,5 +46,4 @@ interface CommentRepository : JpaRepository<CommentEntity, Long> {
         userId: Long,
         pageable: PageRequest,
     ): Page<PostEntity>
-
 }
