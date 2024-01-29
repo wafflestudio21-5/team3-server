@@ -19,5 +19,11 @@ interface ScrapRepository : JpaRepository<ScrapEntity, Long> {
         pageable: PageRequest,
     ): Page<ScrapEntity>
 
+    @Query("select s.post from scraps s where s.user.userId = :userId")
+    fun findScrappedPostByUserId(
+        userId: Long,
+        pageable: PageRequest,
+    ): Page<PostEntity>
+
     fun countByPost(post: PostEntity): Int
 }
