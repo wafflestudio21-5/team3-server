@@ -18,6 +18,9 @@ class PostLikeServiceImpl(
     }
 
     override fun create(postId: Long, userId: Long) {
+        if (exists(postId, userId)) {
+            throw LikeAlreadyExistsException(postId)
+        }
         val user = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
         val post = postRepository.findById(postId).orElseThrow { PostNotFoundException(postId) }
 

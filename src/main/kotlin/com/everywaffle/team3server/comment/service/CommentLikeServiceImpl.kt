@@ -3,6 +3,7 @@ package com.everywaffle.team3server.comment.service
 import com.everywaffle.team3server.comment.model.CommentLikeEntity
 import com.everywaffle.team3server.comment.repository.CommentLikeRepository
 import com.everywaffle.team3server.comment.repository.CommentRepository
+import com.everywaffle.team3server.post.service.LikeAlreadyExistsException
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import org.springframework.stereotype.Service
@@ -18,6 +19,9 @@ class CommentLikeServiceImpl(
     }
 
     override fun create(commentId: Long, userId: Long) {
+        if (exists(commentId, userId)) {
+            throw LikeAlreadyExistsException(commentId)
+        }
         val user = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
         val comment = commentRepository.findById(commentId).orElseThrow { CommentNotFoundException(commentId) }
 
