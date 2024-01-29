@@ -25,32 +25,32 @@ CREATE TABLE user_details (
     department VARCHAR(255) NOT NULL,
     student_id INT NOT NULL,
     user_id BIGINT UNIQUE NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- Posts Table
 CREATE TABLE posts (
     post_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_id BIGINT NOT NULL,
+    user_id BIGINT,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     category VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     likes INT DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
 );
 
 -- Comments Table
 CREATE TABLE comments (
     comment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     post_id BIGINT NOT NULL,
-    user_id BIGINT NOT NULL,
+    user_id BIGINT,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     parent_comment_id BIGINT,
     likes INT DEFAULT 0,
-    FOREIGN KEY (post_id) REFERENCES posts(post_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
     FOREIGN KEY (parent_comment_id) REFERENCES comments(comment_id)
 );
 
@@ -60,8 +60,8 @@ CREATE TABLE post_likes (
     post_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
     UNIQUE (post_id, user_id),
-    FOREIGN KEY (post_id) REFERENCES posts(post_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- Comment Likes Table
@@ -70,8 +70,8 @@ CREATE TABLE comment_likes (
     comment_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
     UNIQUE (comment_id, user_id),
-    FOREIGN KEY (comment_id) REFERENCES comments(comment_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (comment_id) REFERENCES comments(comment_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- Scraps Table
@@ -80,8 +80,8 @@ CREATE TABLE scraps (
     post_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
     UNIQUE (post_id, user_id),
-    FOREIGN KEY (post_id) REFERENCES posts(post_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- Message Sessions Table
@@ -89,8 +89,8 @@ CREATE TABLE message_sessions (
     session_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user1_id BIGINT NOT NULL,
     user2_id BIGINT NOT NULL,
-    FOREIGN KEY (user1_id) REFERENCES users(user_id),
-    FOREIGN KEY (user2_id) REFERENCES users(user_id)
+    FOREIGN KEY (user1_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (user2_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- Messages Table
@@ -100,6 +100,6 @@ CREATE TABLE messages (
     sender_id BIGINT NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (session_id) REFERENCES message_sessions(session_id),
-    FOREIGN KEY (sender_id) REFERENCES users(user_id)
+    FOREIGN KEY (session_id) REFERENCES message_sessions(session_id) ON DELETE CASCADE,
+    FOREIGN KEY (sender_id) REFERENCES users(user_id) ON DELETE CASCADE
 );

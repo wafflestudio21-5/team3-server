@@ -37,4 +37,7 @@ interface CommentRepository : JpaRepository<CommentEntity, Long> {
     ): Page<CommentEntity>
 
     fun countByPost(post: PostEntity): Int
+
+    @Query("SELECT COUNT(c) > 0 FROM comments c WHERE c.parentComment.commentId = :parentId")
+    fun hasChildren(parentId: Long): Boolean
 }

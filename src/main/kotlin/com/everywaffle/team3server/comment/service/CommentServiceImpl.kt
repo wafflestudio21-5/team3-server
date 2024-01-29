@@ -87,7 +87,13 @@ class CommentServiceImpl(
             commentRepository.findById(commentId).orElseThrow {
                 CommentNotFoundException(commentId)
             }
-        commentRepository.delete(comment)
+
+        if (commentRepository.hasChildren(comment.commentId)) {
+            comment.content = "삭제된 댓글입니다."
+            commentRepository.save(comment)
+        } else {
+            commentRepository.delete(comment)
+        }
     }
 
     @Transactional
