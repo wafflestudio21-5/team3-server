@@ -13,6 +13,8 @@ spring:
     password: 1234  # H2 database password
   jpa:
     defer-datasource-initialization: true  # Defer database initialization until after JPA starts
+  flyway:
+    enabled: false
 
 ---
 # Prod profile configuration
@@ -28,3 +30,8 @@ spring:
     hibernate:
       ddl-auto: update  # or 'create' if you want to create tables on startup
     show-sql: true
+  flyway:
+    enabled: true  # Enable Flyway
+    locations: classpath:db/migration  # Location of migration scripts
+    baseline-on-migrate: true  # Baseline an existing database, only creating the schema history table
+    out-of-order: true  # Allow out-of-order migrations
