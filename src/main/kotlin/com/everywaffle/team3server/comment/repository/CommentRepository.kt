@@ -40,4 +40,11 @@ interface CommentRepository : JpaRepository<CommentEntity, Long> {
 
     @Query("SELECT COUNT(c) > 0 FROM comments c WHERE c.parentComment.commentId = :parentId")
     fun hasChildren(parentId: Long): Boolean
+
+    @Query("select distinct c.post from comments c where c.user.userId = :userId")
+    fun findDistinctCommentedPostByUserId(
+        userId: Long,
+        pageable: PageRequest,
+    ): Page<PostEntity>
+
 }
