@@ -55,6 +55,9 @@ dependencies {
 
     // Social login
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+    // Flyway
+    implementation("org.flywaydb:flyway-core")
 }
 
 tasks.withType<KotlinCompile> {
