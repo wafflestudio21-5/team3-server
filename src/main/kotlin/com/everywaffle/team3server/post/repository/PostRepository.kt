@@ -15,6 +15,13 @@ interface PostRepository : JpaRepository<PostEntity, Long> {
         pageable: PageRequest,
     ): Page<PostEntity>
 
+    @Query(
+        """
+        SELECT p FROM posts p WHERE p.category = :category
+        AND (LOWER(p.title) LIKE LOWER(CONCAT('%', :titleKeyword, '%'))
+        OR LOWER(p.content) LIKE LOWER(CONCAT('%', :contentKeyword, '%')))
+    """
+    )
     fun findAllByCategoryAndTitleContainingOrContentContaining(
         category: Category,
         titleKeyword: String,
