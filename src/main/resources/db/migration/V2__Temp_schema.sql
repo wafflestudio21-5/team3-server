@@ -1,0 +1,4 @@
+-- Temp Table
+CREATE TABLE temp (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY
+)

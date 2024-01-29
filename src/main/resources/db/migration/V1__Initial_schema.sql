@@ -93,6 +93,3 @@ CREATE TABLE messages (
     FOREIGN KEY (sender_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE temp (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY
-)
