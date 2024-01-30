@@ -6,6 +6,8 @@
 
 ![Logo](https://github.com/wafflestudio21-5/team3-server/assets/79765552/07bbef19-14b1-47d5-9045-084764ac161f)
 
+> **TEAM 3** 토이프로젝트 <br/> **에브리와플**
+
 ---
 
 <img src='https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge&logo'>
