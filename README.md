@@ -1,1 +1,34 @@
 # team3-server
+
+<br/>
+
+<div align='center'>
+
+![Logo](https://github.com/wafflestudio21-5/team3-server/assets/79765552/07bbef19-14b1-47d5-9045-084764ac161f)
+
+---
+
+<img src='https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge&logo'>
+
+<img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white"/> <a href="https://github.com/wafflestudio21-5/team3-android/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/wafflestudio21-5/team3-android?color=success"></a> <a href="https://github.com/wafflestudio21-5/team3-android/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/wafflestudio21-5/team3-android"></a> <a href="https://github.com/wafflestudio21-5/team3-android/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/wafflestudio21-5/team3-android"></a> <a href="https://github.com/wafflestudio21-5/team3-android/search?l=JavaScript&type=code"><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/wafflestudio21-5/team3-android"></a>
+
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"/> <a href="https://github.com/wafflestudio21-5/team3-server/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/wafflestudio21-5/team3-server?color=success"></a> <a href="https://github.com/wafflestudio21-5/team3-server/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/wafflestudio21-5/team3-server"></a> <a href="https://github.com/wafflestudio21-5/team3-server/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/wafflestudio21-5/team3-server"></a> <a href="https://github.com/wafflestudio21-5/team3-server/search?l=JavaScript&type=code"><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/wafflestudio21-5/team3-server"></a>
+
+---
+
+## <br/> :book: 목차
+
+  <ol>
+    <li><a href="#introduction-project"> 프로젝트 소개 (Intro)</a></li>
+    <li><a href="#introduction-function"> 기능설명 </a></li>
+    <li><a href="#how-to-install"> 설치 안내 </a></li>
+    <li><a href="#how-to-use"> 프로젝트 사용법 </a></li>
+    <li><a href="#prerequisites"> 컴퓨터 구성 / 필수 조건 안내</a></li>
+    <li><a href="#techniques"> 기술 스택</a></li>
+    <li><a href="#team"> 팀 정보</a></li>
+    <li><a href="#license"> 저작권 및 정보</a></li>
+  </ol>
+
+<br/>
+
+---
