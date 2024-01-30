@@ -1,6 +1,7 @@
 package com.everywaffle.team3server.message.model
 
 import com.everywaffle.team3server.user.model.UserEntity
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -15,6 +16,7 @@ import jakarta.persistence.Table
 class MessageSessionEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "session_id")
     val id: Long = 0,
     @ManyToOne
     @JoinColumn(name = "user1_id")
