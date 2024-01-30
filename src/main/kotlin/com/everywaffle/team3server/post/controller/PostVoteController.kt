@@ -2,15 +2,9 @@ package com.everywaffle.team3server.post.controller
 
 import com.everywaffle.team3server.post.dto.VoteRequest
 import com.everywaffle.team3server.post.dto.VoteResponse
-import com.everywaffle.team3server.post.service.PostMakeVoteService
-import com.everywaffle.team3server.post.service.PostVoteService
+import com.everywaffle.team3server.post.service.*
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/post")
@@ -52,5 +46,17 @@ class PostVoteController(
     ): ResponseEntity<VoteResponse.VoteDetail> {
         val voteDetail = postVoteService.delete(postId = postId, userId = request.userId)
         return ResponseEntity.ok(voteDetail)
+    }
+
+    @ExceptionHandler
+    fun handlePostVoteException(e: PostException): ResponseEntity<Unit> {
+        val status =
+            when (e) {
+                is PostVoteAlreadyExistsException, is PostMakeVoteAlreadyExistsException, is AlreadyVotingPostException -> 409
+                is IsNotVotingException -> 403
+                is PostNeverVotedException-> 404
+                else -> 404
+            }
+        return ResponseEntity.status(status).build()
     }
 }
