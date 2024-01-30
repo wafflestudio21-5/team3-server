@@ -24,6 +24,7 @@
 
   <ol>
     <li><a href="#introduction-project"> 프로젝트 소개 (Intro)</a></li>
+    <li><a href="#schedule"> 개발 일정</a></li>
     <li><a href="#introduction-function"> 기능설명 </a></li>
     <li><a href="#how-to-install"> 설치 안내 </a></li>
     <li><a href="#how-to-use"> 프로젝트 사용법 </a></li>
@@ -33,6 +34,82 @@
   </ol>
 
 <br/>
+
+---
+
+<h2 id='introduction-project'> :books: 프로젝트 소개</h2>
+
+<h4> :bulb: 선정 배경 </h4>
+
+> 대학생들에게 가장 친숙한 앱 서비스<br/>
+> 사용자, 게시판, 댓글 중심의 서비스이므로 클론 코딩하기에 적합하다 판단 <br/>
+> 현재의 에브리타임 앱 서비스는 확장할 만한 기능들이 많은 것 같아서 추가 기능 구현 용이 <br/>
+
+위와 같은 이유로 인해, TEAM3는 에브리타임을 클론 코딩하기로 결정하였습니다! <br/><br/>
+
+<h4> :+1: 기본 기능 </h4>
+
+**`로그인/소셜 로그인`** : 사용자 구분을 위한 기본적인 로그인 기능<br/><br/>
+**`게시판/댓글 작성 기능`** : 에브리타임의 주요 기능인 글 및 댓글/대댓글 작성 기능<br/><br/>
+**`쪽지기능`** : 다른 사용자와의 소통을 위한 쪽지 기능<br/><br/>
+
+> 해당 기능에 대한 시연영상은 <a href="#introduction-function"> 기능설명 </a>에서 확인할 수 있습니다.
+
+<br/>
+
+<h4> :+1: 추가 기능 </h4>
+
+**`1:1 랜덤 쪽지 기능`** : 모르는 사람과의 대화 세션 생성 기능<br/><br/>
+**`투표 게시판 기능`** : 토론이 활발해지는 주제에 대해 투표를 추가할 수 있는 기능<br/><br/>
+**`쪽지기능`** : 다른 사용자와의 소통을 위한 쪽지 기능<br/><br/>
+
+> 해당 기능에 대한 시연영상은 <a href="#introduction-function"> 기능설명 </a>에서 확인할 수 있습니다.
+
+<br/>
+
+---
+
+<h2 id='schedule'> :calendar: 개발 일정 </h2>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-6qw1{background-color:#c0c0c0;text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-6qw1" colspan="3">개발 일정</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax"><br>스프린트1</td>
+    <td class="tg-baqh"><br><span style="font-weight:400;font-style:normal">~12/30</span></td>
+    <td class="tg-0lax">1. 클론 서비스 확정<br><br>2. 프론트 및 백엔드 개발 컨벤션 수립</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><br><br>스프린트2</td>
+    <td class="tg-baqh"><br><br>~1/13</td>
+    <td class="tg-0lax">1. AWS 배포 세팅 및 프론트엔드/백엔드 api 테스트<br><br>2. 회원가입/로그인 기능 구현<br><br>3. 유저페이지(마이페이지 구현)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><br><br>스프린트3</td>
+    <td class="tg-baqh"><br><br>~1/27</td>
+    <td class="tg-0lax">1. 게시판 및 댓글 작성 기능 구현<br><br>2. 페이지네이션 구현<br><br>3. 쪽지 기능 구현</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><br><br>스프린트4</td>
+    <td class="tg-baqh"><br><br>~2/3</td>
+    <td class="tg-0lax">1. 랜덤 쪽지 기능 구현<br><br>2. 투표 게시판 기능 구현<br><br>3. 디자인 개선 및 디버깅</td>
+  </tr>
+</tbody>
+</table>
 
 ---
 
