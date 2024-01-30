@@ -54,7 +54,7 @@ class PostVoteController(
             when (e) {
                 is PostVoteAlreadyExistsException, is PostMakeVoteAlreadyExistsException, is AlreadyVotingPostException -> 409
                 is IsNotVotingException -> 403
-                is PostNeverVotedException-> 404
+                is PostNeverVotedException -> 404
                 else -> 404
             }
         return ResponseEntity.status(status).build()
