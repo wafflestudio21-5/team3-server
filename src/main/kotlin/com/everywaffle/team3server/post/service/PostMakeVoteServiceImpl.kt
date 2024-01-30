@@ -7,20 +7,19 @@ import com.everywaffle.team3server.post.repository.PostRepository
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PostMakeVoteServiceImpl(
     private val postMakeVoteRepository: PostMakeVoteRepository,
     private val postRepository: PostRepository,
     private val userRepository: UserRepository,
-) : PostMakeVoteService{
+) : PostMakeVoteService {
     override fun exists(postId: Long, userId: Long): Boolean {
         return postMakeVoteRepository.findByPostPostIdAndUserUserId(postId, userId) != null
     }
 
     override fun isVotingPost(postId: Long): Boolean {
-        val post = postRepository.findById(postId).orElseThrow{ PostNotFoundException(postId) }
+        val post = postRepository.findById(postId).orElseThrow { PostNotFoundException(postId) }
         return post.makeVoteCnt >= 10
     }
 
@@ -31,7 +30,7 @@ class PostMakeVoteServiceImpl(
         }
         val user = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
         val post = postRepository.findById(postId).orElseThrow { PostNotFoundException(postId) }
-        if(isVotingPost(postId)){
+        if (isVotingPost(postId)) {
             throw AlreadyVotingPostException(postId)
         }
         val postMakeVote = PostMakeVoteEntity(post = post, user = user)
@@ -44,7 +43,7 @@ class PostMakeVoteServiceImpl(
         )
     }
 
-    override fun delete(postId: Long, userId: Long) : VoteResponse.MakeVoteDetail {
+    override fun delete(postId: Long, userId: Long): VoteResponse.MakeVoteDetail {
         val vote = postMakeVoteRepository.findByPostPostIdAndUserUserId(postId, userId)
             ?: throw PostNeverVotedException(postId)
         postRepository.findById(postId).orElseThrow { PostNotFoundException(postId) }

@@ -21,7 +21,7 @@ interface PostService {
 
     fun getTrendingPost(page: Int, size: Int): Page<PostResponse.PostDetail>
 
-    fun getVotePost(page: Int, size: Int) : Page<PostResponse.PostDetail>
+    fun getVotePost(page: Int, size: Int): Page<PostResponse.PostDetail>
 
     fun searchPost(keyword: String, category: Category?, page: Int, size: Int): Page<PostResponse.PostDetail>
 }
