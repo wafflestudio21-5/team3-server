@@ -94,7 +94,7 @@
     <td class="tg-0lax">1. 클론 서비스 확정<br><br>2. 프론트 및 백엔드 개발 컨벤션 수립</td>
   </tr>
   <tr>
-    <td class="tg-0lax"><br>스프린트2</td>
+    <td class="tg-0lax">스프린트2</td>
     <td class="tg-baqh">~1/13</td>
     <td class="tg-0lax">1. AWS 배포 세팅 및 프론트엔드/백엔드 api 테스트<br><br>2. 회원가입/로그인 기능 구현<br><br>3. 유저페이지(마이페이지 구현)</td>
   </tr>
