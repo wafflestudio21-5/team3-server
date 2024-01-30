@@ -95,17 +95,17 @@
   </tr>
   <tr>
     <td class="tg-0lax"><br>스프린트2</td>
-    <td class="tg-baqh"><br>~1/13</td>
+    <td class="tg-baqh">~1/13</td>
     <td class="tg-0lax">1. AWS 배포 세팅 및 프론트엔드/백엔드 api 테스트<br><br>2. 회원가입/로그인 기능 구현<br><br>3. 유저페이지(마이페이지 구현)</td>
   </tr>
   <tr>
-    <td class="tg-0lax"><br>스프린트3</td>
-    <td class="tg-baqh"><br>~1/27</td>
+    <td class="tg-0lax">스프린트3</td>
+    <td class="tg-baqh">~1/27</td>
     <td class="tg-0lax">1. 게시판 및 댓글 작성 기능 구현<br><br>2. 페이지네이션 구현<br><br>3. 쪽지 기능 구현</td>
   </tr>
   <tr>
-    <td class="tg-0lax"><br>스프린트4</td>
-    <td class="tg-baqh"><br>~2/3</td>
+    <td class="tg-0lax">스프린트4</td>
+    <td class="tg-baqh">~2/3</td>
     <td class="tg-0lax">1. 랜덤 쪽지 기능 구현<br><br>2. 투표 게시판 기능 구현<br><br>3. 디자인 개선 및 디버깅</td>
   </tr>
 </tbody>
