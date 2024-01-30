@@ -27,8 +27,6 @@
     <li><a href="#schedule"> 개발 일정</a></li>
     <li><a href="#introduction-function"> 기능설명 </a></li>
     <li><a href="#how-to-install"> 설치 안내 </a></li>
-    <li><a href="#how-to-use"> 프로젝트 사용법 </a></li>
-    <li><a href="#prerequisites"> 컴퓨터 구성 / 필수 조건 안내</a></li>
     <li><a href="#techniques"> 기술 스택</a></li>
     <li><a href="#team"> 팀 정보</a></li>
   </ol>
@@ -103,6 +101,26 @@
 
 ---
 
+<h2 id="how-to-install"> :wrench: 설치 안내 (Installation Process)</h2>
+
+<h4>서버 설치</h4>
+
+```bash
+$ git clone https://github.com/wafflestudio21-5/team3-server.git
+$ cd team3-server
+$ ./gradlew build
+$ ./gradlew bootRun
+```
+
+<br/>
+<h4>안드로이드 앱 다운</h4>
+
+안드로이드 앱은 다음 링크(추가 필요)에서 다운받으실 수 있습니다.
+
+<br/>
+
+---
+
 <h2 id="techniques">:hammer: 기술 스택 (Technique Used)</h2>
 
 <img src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/02fb4a9b-43ac-4dac-97cf-5c3fb4ece485">
@@ -137,5 +155,100 @@ DB는 RDBMS의 [MySQL](https://www.mysql.com/)을 사용하였고, 서버 프레
 도커 이미지로 서버를 빌드하게 되는데, 버전 관리를 더 용이하게 하기 위해 도커 이미지 관리 시스템인 [ECR](https://aws.amazon.com/ko/ecr/)을 사용하였습니다. 해당 시스템을 통해 버전별 도커 이미지를 확인하고 PULL할 수 있습니다.
 
 ## <br/>
+
+---
+
+<h2 id="team">:runner: :runner: 팀 정보 (Team Information)</h2>
+
+> **TEAM3** <br> TEAM3는 2명의 안드로이드 개발자, 4명의 스프링 개발자, 그리고 1명의 디자이너로 구성되어 있습니다.
+
+<br/>
+
+<table width="900">
+
+<thead>
+
+<tr>
+
+<th width="100" align="center">Name</th>
+
+<th width="250" align="center">Role</th>
+
+<th width="150" align="center">Github</th>
+
+<th width="300" align="center">E-mail</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td width="100" height="55" align="center">이현우<br>(팀장)</td>
+<td width="250">BackeEnd Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/lhw414">
+<img src="https://img.shields.io/badge/lhw414-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:dlgusdn0414@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=dlgusdn0414@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+<tr>
+<td width="100" height="55" align="center">김건희</td>
+<td width="250">BackEnd Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/gunhee1113">
+<img src="https://img.shields.io/badge/gunhee1113-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:gunhee2001@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=gunhee2001@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+<tr>
+<td width="100" height="55" align="center">한상우</td>
+<td width="250">BackEnd Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/navgod">
+<img src="https://img.shields.io/badge/navgod-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:buzz2604@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=buzz2604@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+<tr>
+<td width="100" height="55" align="center">나예경</td>
+<td width="250">App Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/yknxh">
+<img src="https://img.shields.io/badge/yknxh-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:nyk7535@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=nyk7535@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+<tr>
+<td width="100" height="55" align="center">이현도</td>
+<td width="250">App Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/plgafhd">
+<img src="https://img.shields.io/badge/plgafhd-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:plgafhd@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=plgafhd@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+<tr>
+<td width="100" height="55" align="center">전준아</td>
+<td width="250">App Developer</td>
+<td width="150" align="center">
+<a href="https://github.com/junahjeon2002">
+<img src="https://img.shields.io/badge/junahjeon2002-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:junahjeon2002@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=junahjeon2002@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+<tr>
+<td width="100" height="55" align="center">정유정</td>
+<td width="250">Designer</td>
+<td width="150" align="center">
+<a href="https://github.com/yo0jj">
+<img src="https://img.shields.io/badge/yo0jj-655ced?style=social&logo=github"/></a>
+<td width="300" align="center"><a href="mailto:yasmin607@snu.ac.kr"><img src="https://img.shields.io/static/v1?label=&message=yasmin607@snu.ac.kr&color=lightgray&style=flat-square&logo=gmail"></a></td>
+</tr>
+
+</table>
+
+<br/>
 
 ---
