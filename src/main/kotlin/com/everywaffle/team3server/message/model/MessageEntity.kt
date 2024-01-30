@@ -16,6 +16,7 @@ import java.util.Date
 class MessageEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "message_id")
     val id: Long = 0,
     @ManyToOne
     @JoinColumn(name = "session_id")
