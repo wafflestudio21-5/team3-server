@@ -29,6 +29,9 @@ class HomePostServiceImpl(
                 likes = post.likes,
                 scraps = scrapsCount,
                 comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }
     }
@@ -48,6 +51,9 @@ class HomePostServiceImpl(
                 likes = post.likes,
                 scraps = scrapsCount,
                 comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }
     }

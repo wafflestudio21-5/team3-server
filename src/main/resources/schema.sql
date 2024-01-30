@@ -1,4 +1,6 @@
 -- Drop tables if they already exist
+DROP TABLE IF EXISTS post_make_votes;
+DROP TABLE IF EXISTS post_votes;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS message_sessions;
 DROP TABLE IF EXISTS scraps;
@@ -8,6 +10,7 @@ DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS users;
+
 
 -- Users Table
 CREATE TABLE users (
@@ -37,6 +40,9 @@ CREATE TABLE posts (
     category VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     likes INT DEFAULT 0,
+    make_vote_cnt INT DEFAULT 0,
+    agree INT DEFAULT 0,
+    disagree INT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
 );
 
@@ -103,3 +109,25 @@ CREATE TABLE messages (
     FOREIGN KEY (session_id) REFERENCES message_sessions(session_id) ON DELETE CASCADE,
     FOREIGN KEY (sender_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
+
+-- Post Make Votes Table
+CREATE TABLE post_make_votes (
+    post_make_vote_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    post_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    UNIQUE (post_id, user_id),
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
+);
+
+-- Post Votes Table
+CREATE TABLE post_votes (
+    post_vote_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    post_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    vote VARCHAR(255) NOT NULL,
+    UNIQUE (post_id, user_id),
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
+);
+

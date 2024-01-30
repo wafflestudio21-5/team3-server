@@ -8,4 +8,5 @@ enum class Category {
     INFO_BOARD,
     ISSUE_BOARD,
     MARKET_BOARD,
+    VOTE_BOARD,
 }

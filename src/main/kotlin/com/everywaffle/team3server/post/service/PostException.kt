@@ -10,3 +10,13 @@ class ScrapAlreadyExistsException(postId: Long) : PostException("Scrap for post 
 class UnauthorizedPostAccessException(userId: Long, postId: Long) : PostException(
     "User with id: $userId is not authorized to access post with id: $postId",
 )
+
+class PostVoteAlreadyExistsException(postId: Long) : PostException("Vote for post $postId already exists.")
+
+class PostNeverVotedException(postId: Long) : PostException("Post never voted: $postId")
+
+class PostMakeVoteAlreadyExistsException(postId: Long) : PostException("Make vote for post $postId already exists.")
+
+class AlreadyVotingPostException(postId: Long) : PostException("Post is already being voted: $postId")
+
+class IsNotVotingException(postId: Long) : PostException("Post $postId is not a voting post")

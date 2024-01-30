@@ -5,7 +5,9 @@ import com.everywaffle.team3server.post.dto.PostRequest
 import com.everywaffle.team3server.post.dto.PostResponse
 import com.everywaffle.team3server.post.model.Category
 import com.everywaffle.team3server.post.model.PostEntity
+import com.everywaffle.team3server.post.repository.PostMakeVoteRepository
 import com.everywaffle.team3server.post.repository.PostRepository
+import com.everywaffle.team3server.post.repository.PostVoteRepository
 import com.everywaffle.team3server.post.repository.ScrapRepository
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.UserNotFoundException
@@ -21,6 +23,8 @@ class PostServiceImpl(
     private val userRepository: UserRepository,
     private val scrapRepository: ScrapRepository,
     private val commentRepository: CommentRepository,
+    private val postVoteRepository: PostVoteRepository,
+    private val postMakeVoteRepository: PostMakeVoteRepository,
 ) : PostService {
     @Transactional
     override fun createPost(request: PostRequest.CreateOrUpdatePost): PostResponse.PostDetail {
@@ -47,6 +51,9 @@ class PostServiceImpl(
             likes = savedPost.likes,
             scraps = 0,
             comments = 0,
+            isVoting = false,
+            agree = 0,
+            disagree = 0,
         )
     }
 
@@ -76,6 +83,9 @@ class PostServiceImpl(
             likes = updatedPost.likes,
             scraps = scrapsCount,
             comments = commentsCount,
+            isVoting = updatedPost.makeVoteCnt >= 10,
+            agree = updatedPost.agree,
+            disagree = updatedPost.disagree,
         )
     }
 
@@ -102,6 +112,9 @@ class PostServiceImpl(
                 likes = post.likes,
                 scraps = scrapsCount,
                 comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }.orElse(null)
     }
@@ -125,6 +138,9 @@ class PostServiceImpl(
                 likes = post.likes,
                 scraps = scrapsCount,
                 comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }
     }
@@ -147,6 +163,9 @@ class PostServiceImpl(
                 likes = post.likes,
                 scraps = scrapsCount,
                 comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }
     }
@@ -172,6 +191,9 @@ class PostServiceImpl(
                     likes = post.likes,
                     scraps = scrapsCount,
                     comments = commentsCount,
+                    isVoting = post.makeVoteCnt >= 10,
+                    agree = post.agree,
+                    disagree = post.disagree,
                 )
             }
         } else {
@@ -188,6 +210,9 @@ class PostServiceImpl(
                     likes = post.likes,
                     scraps = scrapsCount,
                     comments = commentsCount,
+                    isVoting = post.makeVoteCnt >= 10,
+                    agree = post.agree,
+                    disagree = post.disagree,
                 )
             }
         }
