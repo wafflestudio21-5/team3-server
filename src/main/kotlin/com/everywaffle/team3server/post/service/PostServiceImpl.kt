@@ -171,7 +171,7 @@ class PostServiceImpl(
     override fun getVotePost(
         page: Int,
         size: Int
-    ) : Page<PostResponse.PostDetail> {
+    ): Page<PostResponse.PostDetail> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "post.createdAt"))
         return postVoteRepository.findAllVotePost(pageable).map { post ->
             val scrapsCount = scrapRepository.countByPost(post)
