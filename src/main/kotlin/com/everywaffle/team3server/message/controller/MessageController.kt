@@ -49,7 +49,13 @@ class MessageController(private val messageService: MessageService) {
         val messages = messageService.getMessageList(sessionId)
         return ResponseEntity.ok(messages)
     }
-
+    @PostMapping("/random")
+    fun sendRandomMessage(
+        @RequestBody request: MessageRequest.SendMessage,
+    ): ResponseEntity<MessageResponse.MessageDetail> {
+        val messageDetail = messageService.sendRandomMessage(request.senderId, request.content)
+        return ResponseEntity.ok(messageDetail)
+    }
     @ExceptionHandler
     fun handleMessageException(e: RuntimeException): ResponseEntity<String> {
         val status =

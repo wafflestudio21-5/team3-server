@@ -6,7 +6,7 @@ import com.everywaffle.team3server.message.dto.MessageSessionRequest
 import com.everywaffle.team3server.message.model.MessageEntity
 import com.everywaffle.team3server.message.model.MessageSessionEntity
 import com.everywaffle.team3server.message.repository.MessageRepository
-import com.everywaffle.team3server.message.repository.MessageSessionRepostiory
+import com.everywaffle.team3server.message.repository.MessageSessionRepository
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.UserNotFoundException
 import org.springframework.stereotype.Service
@@ -14,7 +14,7 @@ import java.util.Date
 
 @Service
 class MessageServiceImpl(
-    private val messageSessionRepository: MessageSessionRepostiory,
+    private val messageSessionRepository: MessageSessionRepository,
     private val messageRepository: MessageRepository,
     private val userRepository: UserRepository,
 ) : MessageService {
@@ -75,5 +75,19 @@ class MessageServiceImpl(
                 createdAt = message.createdAt,
             )
         }
+    }
+
+    override fun sendRandomMessage(senderId: Long, content: String): MessageResponse.MessageDetail {
+        val allUsersExceptSender = userRepository.findAll().filter { it.userId != senderId }
+        if (allUsersExceptSender.isEmpty()) {
+            throw UserNotFoundException("No other users available")
+        }
+
+        val randomReceiver = allUsersExceptSender.random()
+        val sessionRequest = MessageSessionRequest.CreateSession(user1Id = senderId, user2Id = randomReceiver.userId)
+        val sessionId = createSession(sessionRequest)
+
+        val sendMessageRequest = MessageRequest.SendMessage(sessionId = sessionId, senderId = senderId, content = content)
+        return sendMessage(sendMessageRequest)
     }
 }

@@ -12,4 +12,6 @@ interface MessageService {
     fun getSessionList(userId: Long): List<MessageResponse.SessionDetail>
 
     fun getMessageList(sessionId: Long): List<MessageResponse.MessageDetail>
+
+    fun sendRandomMessage(senderId: Long, content: String): MessageResponse.MessageDetail
 }
