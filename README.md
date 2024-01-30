@@ -57,7 +57,6 @@ DB는 RDBMS의 [MySQL](https://www.mysql.com/)을 사용하였고, 서버 프레
 
 **1. Framework**
 안드로이드 앱 빌드를 위해 [Android Studio](https://developer.android.com/studio?hl=ko)를 사용하였습니다. 언어로는 [Kotlin](https://kotlinlang.org/)을 사용하였습니다.
-
 <br/>
 
 ### Infra
