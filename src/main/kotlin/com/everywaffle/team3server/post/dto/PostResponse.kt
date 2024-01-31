@@ -14,5 +14,8 @@ class PostResponse {
         val likes: Int,
         val scraps: Int,
         val comments: Int,
+        val isVoting: Boolean,
+        val agree: Int,
+        val disagree: Int,
     )
 }

@@ -58,4 +58,58 @@ interface PostRepository : JpaRepository<PostEntity, Long> {
 
     @Query("select p from posts p where p.user.userId = :userId")
     fun findByUserId(userId: Long, pageable: PageRequest): Page<PostEntity>
+
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(
+        """
+        UPDATE posts p SET p.agree = p.agree + 1 WHERE p.postId = :postId
+    """
+    )
+    fun incrementAgree(postId: Long)
+
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(
+        """
+        UPDATE posts p SET p.disagree = p.disagree + 1 WHERE p.postId = :postId
+    """
+    )
+    fun incrementDisagree(postId: Long)
+
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(
+        """
+        UPDATE posts p SET p.agree = p.agree - 1 WHERE p.postId = :postId
+    """
+    )
+    fun decrementAgree(postId: Long)
+
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(
+        """
+        UPDATE posts p SET p.disagree = p.disagree - 1 WHERE p.postId = :postId
+    """
+    )
+    fun decrementDisagree(postId: Long)
+
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(
+        """
+        UPDATE posts p SET p.makeVoteCnt = p.makeVoteCnt + 1 WHERE p.postId = :postId
+    """
+    )
+    fun incrementMakeVoteCnt(postId: Long)
+
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(
+        """
+        UPDATE posts p SET p.makeVoteCnt = p.makeVoteCnt - 1 WHERE p.postId = :postId
+    """
+    )
+    fun decrementMakeVoteCnt(postId: Long)
 }

@@ -34,6 +34,9 @@ class MyPostServiceImpl(
                 likes = post.likes,
                 scraps = scrapsCount,
                 comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }
     }
@@ -57,6 +60,9 @@ class MyPostServiceImpl(
                 likes = post.likes,
                 scraps = scrapsCount,
                 comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }
     }
@@ -79,7 +85,10 @@ class MyPostServiceImpl(
                 createdAt = post.createdAt,
                 likes = post.likes,
                 scraps = scrapsCount,
-                comments = commentsCount
+                comments = commentsCount,
+                isVoting = post.makeVoteCnt >= 10,
+                agree = post.agree,
+                disagree = post.disagree,
             )
         }
     }

@@ -73,6 +73,15 @@ class PostController(private val postService: PostService) {
         return ResponseEntity.ok(postList.content)
     }
 
+    @GetMapping("/vote-board")
+    fun getVotePost(
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int
+    ): ResponseEntity<List<PostResponse.PostDetail>> {
+        val postList = postService.getVotePost(page, size)
+        return ResponseEntity.ok(postList.content)
+    }
+
     @GetMapping("/search/{category}")
     fun searchCategoryPost(
         @PathVariable category: Category,
