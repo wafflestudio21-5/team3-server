@@ -55,7 +55,7 @@ class WithdrawalAPITest @Autowired constructor (
         val token = mapper.readValue<Map<String, Any>>(signInResponseBody).get("token") as String
 
         mvc.perform(
-            MockMvcRequestBuilders.get("/api/withdrawal")
+            MockMvcRequestBuilders.post("/api/withdrawal")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer $token")
                 .content(
                     mapper.writeValueAsString(
@@ -105,7 +105,7 @@ class WithdrawalAPITest @Autowired constructor (
         val token = mapper.readValue<Map<String, Any>>(signInResponseBody).get("token") as String
 
         mvc.perform(
-            MockMvcRequestBuilders.get("/api/withdrawal")
+            MockMvcRequestBuilders.post("/api/withdrawal")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer $token")
                 .content(
                     mapper.writeValueAsString(

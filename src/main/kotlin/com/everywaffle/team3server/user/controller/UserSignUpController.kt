@@ -48,7 +48,7 @@ class UserSignUpController(
         return response
     }
 
-    @GetMapping("/api/withdrawal")
+    @PostMapping("/api/withdrawal")
     fun withdrawal(
         @RequestBody withdrawalRequest: UserRequest.WithdrawalRequest,
         request: HttpServletRequest
