@@ -15,6 +15,7 @@ class PostResponse {
         val scraps: Int,
         val comments: Int,
         val isVoting: Boolean,
+        val makeVoteCnt: Int,
         val agree: Int,
         val disagree: Int,
     )

@@ -50,6 +50,7 @@ class PostServiceImpl(
             scraps = 0,
             comments = 0,
             isVoting = false,
+            makeVoteCnt = 0,
             agree = 0,
             disagree = 0,
         )
@@ -82,6 +83,7 @@ class PostServiceImpl(
             scraps = scrapsCount,
             comments = commentsCount,
             isVoting = updatedPost.makeVoteCnt >= 10,
+            makeVoteCnt = updatedPost.makeVoteCnt,
             agree = updatedPost.agree,
             disagree = updatedPost.disagree,
         )
@@ -111,6 +113,7 @@ class PostServiceImpl(
                 scraps = scrapsCount,
                 comments = commentsCount,
                 isVoting = post.makeVoteCnt >= 10,
+                makeVoteCnt = post.makeVoteCnt,
                 agree = post.agree,
                 disagree = post.disagree,
             )
@@ -137,6 +140,7 @@ class PostServiceImpl(
                 scraps = scrapsCount,
                 comments = commentsCount,
                 isVoting = post.makeVoteCnt >= 10,
+                makeVoteCnt = post.makeVoteCnt,
                 agree = post.agree,
                 disagree = post.disagree,
             )
@@ -162,6 +166,7 @@ class PostServiceImpl(
                 scraps = scrapsCount,
                 comments = commentsCount,
                 isVoting = post.makeVoteCnt >= 10,
+                makeVoteCnt = post.makeVoteCnt,
                 agree = post.agree,
                 disagree = post.disagree,
             )
@@ -187,6 +192,7 @@ class PostServiceImpl(
                 scraps = scrapsCount,
                 comments = commentsCount,
                 isVoting = post.makeVoteCnt >= 10,
+                makeVoteCnt = post.makeVoteCnt,
                 agree = post.agree,
                 disagree = post.disagree,
             )
@@ -215,6 +221,7 @@ class PostServiceImpl(
                     scraps = scrapsCount,
                     comments = commentsCount,
                     isVoting = post.makeVoteCnt >= 10,
+                    makeVoteCnt = post.makeVoteCnt,
                     agree = post.agree,
                     disagree = post.disagree,
                 )
@@ -234,6 +241,7 @@ class PostServiceImpl(
                     scraps = scrapsCount,
                     comments = commentsCount,
                     isVoting = post.makeVoteCnt >= 10,
+                    makeVoteCnt = post.makeVoteCnt,
                     agree = post.agree,
                     disagree = post.disagree,
                 )
