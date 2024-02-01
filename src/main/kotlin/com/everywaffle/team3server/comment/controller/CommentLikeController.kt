@@ -24,11 +24,6 @@ class CommentLikeController(private val commentLikeService: CommentLikeService) 
     }
     @ExceptionHandler
     fun handleLikeAlreadyExistsException(e: LikeAlreadyExistsException): ResponseEntity<String> {
-        val status =
-            when (e) {
-                is LikeAlreadyExistsException -> 409
-                else -> 500
-            }
-        return ResponseEntity.status(status).build()
+        return ResponseEntity.status(409).build()
     }
 }
