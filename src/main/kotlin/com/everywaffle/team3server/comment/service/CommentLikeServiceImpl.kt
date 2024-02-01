@@ -32,14 +32,13 @@ class CommentLikeServiceImpl(
     }
 
     @Synchronized
-    override fun createSynchronized(postId: Long, userId: Long) {
-        create(postId, userId)
+    override fun createSynchronized(commentId: Long, userId: Long) {
+        create(commentId, userId)
     }
 
     override fun delete(commentId: Long, userId: Long) {
         val like = commentLikeRepository.findByCommentCommentIdAndUserUserId(commentId, userId)
             ?: throw CommentNeverLikedException(commentId)
-        val comment = commentRepository.findById(commentId).orElseThrow { CommentNotFoundException(commentId) }
 
         commentRepository.decrementLikes(commentId)
 
