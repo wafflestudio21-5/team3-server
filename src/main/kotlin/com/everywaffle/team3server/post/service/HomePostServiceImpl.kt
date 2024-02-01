@@ -30,6 +30,7 @@ class HomePostServiceImpl(
                 scraps = scrapsCount,
                 comments = commentsCount,
                 isVoting = post.makeVoteCnt >= 10,
+                makeVoteCnt = post.makeVoteCnt,
                 agree = post.agree,
                 disagree = post.disagree,
             )
@@ -52,6 +53,7 @@ class HomePostServiceImpl(
                 scraps = scrapsCount,
                 comments = commentsCount,
                 isVoting = post.makeVoteCnt >= 10,
+                makeVoteCnt = post.makeVoteCnt,
                 agree = post.agree,
                 disagree = post.disagree,
             )
