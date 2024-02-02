@@ -110,7 +110,7 @@ class CommentServiceImpl(
                 val childCommentDetail =
                     CommentResponse.CommentDetail(
                         id = comment.commentId,
-                        userId = comment.user.userId,
+                        userId = comment.user?.userId ?: -1,
                         postId = comment.post.postId,
                         content = comment.content,
                         createdAt = comment.createdAt,
@@ -127,7 +127,7 @@ class CommentServiceImpl(
                 val commentDetailInstance =
                     CommentResponse.CommentDetailList(
                         id = comment.commentId,
-                        userId = comment.user.userId,
+                        userId = comment.user?.userId ?: -1,
                         postId = comment.post.postId,
                         content = comment.content,
                         createdAt = comment.createdAt,
