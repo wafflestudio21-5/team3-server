@@ -43,7 +43,7 @@ CREATE TABLE posts (
     make_vote_cnt INT DEFAULT 0,
     agree INT DEFAULT 0,
     disagree INT DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- Comments Table
