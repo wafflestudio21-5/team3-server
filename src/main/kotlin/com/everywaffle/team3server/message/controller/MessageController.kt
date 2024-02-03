@@ -34,11 +34,21 @@ class MessageController(private val messageService: MessageService) {
         return ResponseEntity.ok(messageDetail)
     }
 
+    // 랜덤 세션이 아닌 것들을 반환하는 API
     @GetMapping("/sessions/{userId}")
     fun getSessionList(
         @PathVariable userId: Long,
     ): ResponseEntity<List<MessageResponse.SessionDetail>> {
-        val sessions = messageService.getSessionList(userId)
+        val sessions = messageService.getSessionList(userId, isRandom = false)
+        return ResponseEntity.ok(sessions)
+    }
+
+    // 랜덤 세션만 반환하는 API
+    @GetMapping("/sessions-random/{userId}")
+    fun getRandomSessionList(
+        @PathVariable userId: Long,
+    ): ResponseEntity<List<MessageResponse.SessionDetail>> {
+        val sessions = messageService.getSessionList(userId, isRandom = true)
         return ResponseEntity.ok(sessions)
     }
 
@@ -49,6 +59,7 @@ class MessageController(private val messageService: MessageService) {
         val messages = messageService.getMessageList(sessionId)
         return ResponseEntity.ok(messages)
     }
+
     @PostMapping("/random")
     fun sendRandomMessage(
         @RequestBody request: MessageRequest.SendMessage,
@@ -56,6 +67,7 @@ class MessageController(private val messageService: MessageService) {
         val messageDetail = messageService.sendRandomMessage(request.senderId, request.content)
         return ResponseEntity.ok(messageDetail)
     }
+
     @ExceptionHandler
     fun handleMessageException(e: RuntimeException): ResponseEntity<String> {
         val status =

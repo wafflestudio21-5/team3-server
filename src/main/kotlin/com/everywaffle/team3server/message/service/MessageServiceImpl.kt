@@ -22,7 +22,7 @@ class MessageServiceImpl(
         val user1 = userRepository.findById(request.user1Id).orElseThrow { UserNotFoundException() }
         val user2 = userRepository.findById(request.user2Id).orElseThrow { UserNotFoundException() }
 
-        val session = MessageSessionEntity(user1 = user1, user2 = user2)
+        val session = MessageSessionEntity(user1 = user1, user2 = user2, isRandom = false)
         return messageSessionRepository.save(session).id
     }
 
@@ -42,8 +42,16 @@ class MessageServiceImpl(
         )
     }
 
-    override fun getSessionList(userId: Long): List<MessageResponse.SessionDetail> {
-        val sessions = messageSessionRepository.findByUser1UserIdOrUser2UserId(userId, userId)
+    override fun getSessionList(
+        userId: Long,
+        isRandom: Boolean,
+    ): List<MessageResponse.SessionDetail> {
+        val sessions =
+            if (isRandom) {
+                messageSessionRepository.findByUserAndIsRandom(userId, true)
+            } else {
+                messageSessionRepository.findByUserAndIsRandom(userId, false)
+            }
         return sessions.map { session ->
             val lastMessage = messageRepository.findTopBySessionIdOrderByCreatedAtDesc(session.id)
             MessageResponse.SessionDetail(
@@ -77,17 +85,22 @@ class MessageServiceImpl(
         }
     }
 
-    override fun sendRandomMessage(senderId: Long, content: String): MessageResponse.MessageDetail {
+    override fun sendRandomMessage(
+        senderId: Long,
+        content: String,
+    ): MessageResponse.MessageDetail {
         val allUsersExceptSender = userRepository.findAll().filter { it.userId != senderId }
         if (allUsersExceptSender.isEmpty()) {
             throw UserNotFoundException("No other users available")
         }
 
         val randomReceiver = allUsersExceptSender.random()
-        val sessionRequest = MessageSessionRequest.CreateSession(user1Id = senderId, user2Id = randomReceiver.userId)
-        val sessionId = createSession(sessionRequest)
+        val user1 = userRepository.findById(senderId).orElseThrow { UserNotFoundException() }
+        val user2 = userRepository.findById(randomReceiver.userId).orElseThrow { UserNotFoundException() }
 
-        val sendMessageRequest = MessageRequest.SendMessage(sessionId = sessionId, senderId = senderId, content = content)
+        val session = MessageSessionEntity(user1 = user1, user2 = user2, isRandom = true)
+
+        val sendMessageRequest = MessageRequest.SendMessage(sessionId = session.id, senderId = senderId, content = content)
         return sendMessage(sendMessageRequest)
     }
 }

@@ -9,9 +9,15 @@ interface MessageService {
 
     fun sendMessage(request: MessageRequest.SendMessage): MessageResponse.MessageDetail
 
-    fun getSessionList(userId: Long): List<MessageResponse.SessionDetail>
+    fun getSessionList(
+        userId: Long,
+        isRandom: Boolean,
+    ): List<MessageResponse.SessionDetail>
 
     fun getMessageList(sessionId: Long): List<MessageResponse.MessageDetail>
 
-    fun sendRandomMessage(senderId: Long, content: String): MessageResponse.MessageDetail
+    fun sendRandomMessage(
+        senderId: Long,
+        content: String,
+    ): MessageResponse.MessageDetail
 }
