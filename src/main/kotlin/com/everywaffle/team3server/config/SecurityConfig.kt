@@ -1,5 +1,6 @@
 package com.everywaffle.team3server.config
 
+import OAuth2AuthenticationSuccessHandler
 import com.everywaffle.team3server.auth.JwtAuthenticationFilter
 import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.service.CustomOAuth2UserService
@@ -41,7 +42,8 @@ class SecurityConfig(
                 it.userInfoEndpoint {
                     it.userService(customOAuth2UserService)
                 }
-                    .defaultSuccessUrl("/welcome", true)
+                    .defaultSuccessUrl("/api/signin/token", true)
+                    .successHandler(OAuth2AuthenticationSuccessHandler(jwtTokenProvider))
             }
         return http.build()
     }

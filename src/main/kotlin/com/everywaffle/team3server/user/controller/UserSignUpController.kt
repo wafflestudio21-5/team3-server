@@ -60,29 +60,6 @@ class UserSignUpController(
         // -> redirect to logout page afterward
     }
 
-    @GetMapping("/api/signup/kakao")
-    fun kakaoLogin(): String {
-        return return """
-            <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Login</title>
-                </head>
-                <body>
-                    <h2>Login Page</h2>
-                    <div>
-                        <a href="/oauth2/authorization/kakao">Login with Kakao</a>
-                    </div>
-                </body>
-            </html>
-        """.trimIndent()
-    }
-
-    @GetMapping("/welcome")
-    fun home(): String {
-        return "welcome"
-    }
-
     @ExceptionHandler
     fun handleException(e: UserException): ResponseEntity<Unit> {
         val status =
