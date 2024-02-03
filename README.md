@@ -102,6 +102,116 @@
 
 <h2 id="introduction-function"> :page_with_curl: 기능 설명</h2>
 
+- <h4>회원가입 로그인</h4>
+
+<table width="900">
+
+<tr>
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/cea09190-e1db-497b-ba8a-878d37f02e2d" width=100%"></td>
+<td width ="450" align="center">기본 <b>회원가입</b> 기능</td>
+</tr>
+
+<tr>
+<td width ="450" align="center">기본 <b>로그인</b> 기능
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/088bb7e7-c6d0-4f0e-a3ff-91688c3ae3ea" width=100%"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"><b>카카오 로그인</b> 기능</td>
+</tr>
+
+</table>
+<br/>
+
+- <h4>게시판 기능</h4>
+
+<table width="900">
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center">
+<td width ="450" align="center"></td>
+</tr>
+
+</table>
+<br/>
+
+- <h4>투표 게시판 기능</h4>
+
+<table width="900">
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center">
+<td width ="450" align="center"></td>
+</tr>
+
+</table>
+<br/>
+
+- <h4>쪽지 기능</h4>
+
+<table width="900">
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center">
+<td width ="450" align="center"></td>
+</tr>
+
+</table>
+<br/>
+
+- <h4>마이페이지 기능</h4>
+
+<table width="900">
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center"></td>
+<td width ="450" align="center"></td>
+</tr>
+
+<tr>
+<td width ="450" align="center">
+<td width ="450" align="center"></td>
+</tr>
+
+</table>
+<br/>
+
 ---
 
 <h2 id="how-to-install"> :wrench: 설치 안내 (Installation Process)</h2>
