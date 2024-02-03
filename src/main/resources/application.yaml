@@ -15,6 +15,7 @@ spring:
           kakao:
             # 오픈되도 괜찮긴 한데 숨길지 말지 논의 필요
             client-id: 8de8b929607ba0d286b7f07a4d19031d
+            client-authentication-method: POST
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
             scope: profile_nickname
