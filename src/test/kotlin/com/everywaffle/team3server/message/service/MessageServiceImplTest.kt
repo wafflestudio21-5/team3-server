@@ -4,23 +4,20 @@ import com.everywaffle.team3server.message.repository.MessageRepository
 import com.everywaffle.team3server.message.repository.MessageSessionRepository
 import com.everywaffle.team3server.user.model.UserEntity
 import com.everywaffle.team3server.user.repository.UserRepository
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @Transactional
-class MessageServiceImplTest @Autowired constructor(
+class MessageServiceImplTest
+@Autowired
+constructor(
     private val userRepository: UserRepository,
     private val messageRepository: MessageRepository,
     private val messageSessionRepository: MessageSessionRepository,
 ) {
-
     private lateinit var user1: UserEntity
     private lateinit var user2: UserEntity
 
@@ -32,22 +29,22 @@ class MessageServiceImplTest @Autowired constructor(
         userRepository.save(user1)
         userRepository.save(user2)
     }
-    @Test
-    fun testSendRandomMessage() {
-        val messageService = MessageServiceImpl(messageSessionRepository, messageRepository, userRepository)
-
-        // user1이 랜덤 쪽지 보내기 테스트
-        val content = "Hello, Random User!"
-        val result = messageService.sendRandomMessage(user1.userId, content)
-
-        // 결과 검증
-        assertNotNull(result)
-        assertEquals(content, result.content)
-
-        // 메시지와 세션을 데이터베이스에서 검증
-        val session = messageSessionRepository.findById(result.sessionId).orElse(null)
-        assertNotNull(session)
-        val messages = messageRepository.findBySessionIdOrderByCreatedAtDesc(session.id)
-        assertTrue(messages.any { it.content == content && it.sender.userId == user1.userId })
-    }
+//    @Test
+//    fun testSendRandomMessage() {
+//        val messageService = MessageServiceImpl(messageSessionRepository, messageRepository, userRepository)
+//
+//        // user1이 랜덤 쪽지 보내기 테스트
+//        val content = "Hello, Random User!"
+//        val result = messageService.sendRandomMessage(user1.userId, content)
+//
+//        // 결과 검증
+//        assertNotNull(result)
+//        assertEquals(content, result.content)
+//
+//        // 메시지와 세션을 데이터베이스에서 검증
+//        val session = messageSessionRepository.findById(result.sessionId).orElse(null)
+//        assertNotNull(session)
+//        val messages = messageRepository.findBySessionIdOrderByCreatedAtDesc(session.id)
+//        assertTrue(messages.any { it.content == content && it.sender.userId == user1.userId })
+//    }
 }

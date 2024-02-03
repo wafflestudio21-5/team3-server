@@ -95,6 +95,7 @@ CREATE TABLE message_sessions (
     session_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user1_id BIGINT NOT NULL,
     user2_id BIGINT NOT NULL,
+    is_random BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (user1_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (user2_id) REFERENCES users(user_id) ON DELETE CASCADE
 );

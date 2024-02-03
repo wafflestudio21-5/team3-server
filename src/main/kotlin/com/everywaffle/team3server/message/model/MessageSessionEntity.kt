@@ -24,6 +24,8 @@ class MessageSessionEntity(
     @ManyToOne
     @JoinColumn(name = "user2_id")
     val user2: UserEntity,
+    @Column(name = "is_random", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    val isRandom: Boolean,
     @OneToMany(mappedBy = "session")
     val messages: List<MessageEntity> = mutableListOf(),
 )
