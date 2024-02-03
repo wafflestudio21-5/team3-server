@@ -129,18 +129,18 @@
 <table width="900">
 
 <tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/fca186fc-dde2-423f-842f-ab9c7fa31481" width=100%"></td>
+<td width ="450" align="center">기본 게시판 기능</td>
 </tr>
 
 <tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
+<td width ="450" align="center">댓글 및 대댓글 작성</td>
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/e825dc77-3413-40ee-85e1-cfb7f658a4aa" width=100%"></td>
 </tr>
 
 <tr>
-<td width ="450" align="center">
-<td width ="450" align="center"></td>
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/4811282a-1b54-4b3d-b302-e695018440ba" width=100%"></td>
+<td width ="450" align="center">내가 쓴 글<br>댓글 단 글<br>스크랩 한 글</td>
 </tr>
 
 </table>
@@ -151,18 +151,8 @@
 <table width="900">
 
 <tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
-</tr>
-
-<tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
-</tr>
-
-<tr>
-<td width ="450" align="center">
-<td width ="450" align="center"></td>
+<td width ="450" align="center">투표 글에 대해 투표 가능</td>
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/9e0d93cf-0738-4a4e-8bb6-c26bb11e413e"></td>
 </tr>
 
 </table>
@@ -173,44 +163,24 @@
 <table width="900">
 
 <tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/38ba51bd-e3ea-4c73-9e6e-cafc934f9bea"></td>
+<td width ="450" align="center">사용자에게 쪽지 보내기 기능</td>
 </tr>
 
 <tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
+<td width ="450" align="center">쪽지 리스트 및 쪽지 보내기</td>
+<td width ="450" align="center"><video src="https://github.com/wafflestudio21-5/team3-server/assets/79765552/811dcc2f-b072-433d-839a-57a0d69679ca"></video></td>
 </tr>
 
 <tr>
-<td width ="450" align="center">
-<td width ="450" align="center"></td>
+<td width ="450" align="center"><video src=https://github.com/wafflestudio21-5/team3-server/assets/79765552/2e222e18-ca46-44de-9a24-2d9a06f048fb></video></td>
+<td width ="450" align="center">랜덤 쪽지 보내기</td>
 </tr>
 
 </table>
 <br/>
 
-- <h4>마이페이지 기능</h4>
-
-<table width="900">
-
-<tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
-</tr>
-
-<tr>
-<td width ="450" align="center"></td>
-<td width ="450" align="center"></td>
-</tr>
-
-<tr>
-<td width ="450" align="center">
-<td width ="450" align="center"></td>
-</tr>
-
-</table>
-<br/>
+그밖에도 다양한 기능이 앱에 존재합니다! <a href="#how-to-install"> 설치 안내 </a>에서 apk 파일을 받아 직접 사용해보세요!
 
 ---
 
@@ -228,7 +198,7 @@ $ ./gradlew bootRun
 <br/>
 <h4>안드로이드 앱 다운</h4>
 
-안드로이드 앱은 다음 링크(추가 필요)에서 다운받으실 수 있습니다.
+안드로이드 앱은 <a href="https://drive.google.com/file/d/1Okdv-F5DhdU2b7igFGb0OrrWoxJYqXFL/view?usp=sharing">다운로드 링크</a>에서 다운받으실 수 있습니다.
 
 <br/>
 
