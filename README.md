@@ -100,6 +100,10 @@
 
 ---
 
+<h2 id="introduction-function"> :page_with_curl: 기능 설명</h2>
+
+---
+
 <h2 id="how-to-install"> :wrench: 설치 안내 (Installation Process)</h2>
 
 <h4>서버 설치</h4>
@@ -212,7 +216,7 @@ DB는 RDBMS의 [MySQL](https://www.mysql.com/)을 사용하였고, 서버 프레
 
 <tr>
 <td width="100" height="55" align="center">나예경</td>
-<td width="250">App Developer</td>
+<td width="250">BackEnd Developer</td>
 <td width="150" align="center">
 <a href="https://github.com/yknxh">
 <img src="https://img.shields.io/badge/yknxh-655ced?style=social&logo=github"/></a>
