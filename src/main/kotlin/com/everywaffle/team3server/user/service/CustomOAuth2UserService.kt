@@ -14,7 +14,6 @@ class CustomOAuth2UserService(
     private val userRepository: UserRepository,
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
-    private val jwtTokenProvider: JwtTokenProvider,
 ) : DefaultOAuth2UserService() {
     private val logger: Logger = LoggerFactory.getLogger(CustomOAuth2UserService::class.java)
     override fun loadUser(userRequest: OAuth2UserRequest): OAuth2User {
