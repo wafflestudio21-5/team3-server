@@ -19,7 +19,6 @@ import com.everywaffle.team3server.user.service.WithdrawalInvalidPasswordExcepti
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -58,29 +57,6 @@ class UserSignUpController(
 
         userWithdrawalService.withdrawal(username, withdrawalRequest.password)
         // -> redirect to logout page afterward
-    }
-
-    @GetMapping("/api/signup/kakao")
-    fun kakaoLogin(): String {
-        return return """
-            <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Login</title>
-                </head>
-                <body>
-                    <h2>Login Page</h2>
-                    <div>
-                        <a href="/oauth2/authorization/kakao">Login with Kakao</a>
-                    </div>
-                </body>
-            </html>
-        """.trimIndent()
-    }
-
-    @GetMapping("/welcome")
-    fun home(): String {
-        return "welcome"
     }
 
     @ExceptionHandler

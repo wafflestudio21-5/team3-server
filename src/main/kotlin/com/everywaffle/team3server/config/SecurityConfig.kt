@@ -1,8 +1,11 @@
 package com.everywaffle.team3server.config
 
+import OAuth2AuthenticationSuccessHandler
 import com.everywaffle.team3server.auth.JwtAuthenticationFilter
 import com.everywaffle.team3server.auth.JwtTokenProvider
+import com.everywaffle.team3server.user.repository.UserRepository
 import com.everywaffle.team3server.user.service.CustomOAuth2UserService
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -16,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class SecurityConfig(
     private val jwtTokenProvider: JwtTokenProvider,
     private val customOAuth2UserService: CustomOAuth2UserService,
+    private val userRepository: UserRepository,
 ) {
     @Bean
     @Throws(Exception::class)
@@ -41,7 +45,8 @@ class SecurityConfig(
                 it.userInfoEndpoint {
                     it.userService(customOAuth2UserService)
                 }
-                    .defaultSuccessUrl("/welcome", true)
+                    .defaultSuccessUrl("/api/signin/token", true)
+                    .successHandler(OAuth2AuthenticationSuccessHandler(jwtTokenProvider, ObjectMapper(), userRepository))
             }
         return http.build()
     }

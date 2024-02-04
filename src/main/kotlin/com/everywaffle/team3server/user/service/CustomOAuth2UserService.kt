@@ -1,5 +1,6 @@
 package com.everywaffle.team3server.user.service
 
+import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.repository.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -13,6 +14,7 @@ class CustomOAuth2UserService(
     private val userRepository: UserRepository,
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
+    private val jwtTokenProvider: JwtTokenProvider,
 ) : DefaultOAuth2UserService() {
     private val logger: Logger = LoggerFactory.getLogger(CustomOAuth2UserService::class.java)
     override fun loadUser(userRequest: OAuth2UserRequest): OAuth2User {
@@ -31,13 +33,13 @@ class CustomOAuth2UserService(
                 userSignUpService.signUp(userName = userName, password = "0000", email = "")
                 val newUser = userRepository.findByUserName(userName)
                 if (newUser != null) {
-                    userSignInService.localSignIn(newUser.userName, newUser.password)
+                    val userResponse = userSignInService.localSignIn(newUser.userName, newUser.password)
                 } else {
                     throw UserNotFoundException()
                 }
             } else {
                 // 이미 존재하는 사용자라면 필요한 경우 로그인 처리
-                userSignInService.localSignIn(existingUser.userName, existingUser.password)
+                val userResponse = userSignInService.localSignIn(existingUser.userName, existingUser.password)
             }
         }
         return oAuth2User
