@@ -1,6 +1,5 @@
 package com.everywaffle.team3server.user.service
 
-import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.repository.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -14,7 +13,6 @@ class CustomOAuth2UserService(
     private val userRepository: UserRepository,
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
-    private val jwtTokenProvider: JwtTokenProvider,
 ) : DefaultOAuth2UserService() {
     private val logger: Logger = LoggerFactory.getLogger(CustomOAuth2UserService::class.java)
     override fun loadUser(userRequest: OAuth2UserRequest): OAuth2User {
