@@ -1,7 +1,6 @@
 package com.everywaffle.team3server.user.service
 
 import com.everywaffle.team3server.auth.JwtTokenProvider
-import com.everywaffle.team3server.user.dto.LocalSignInResponse
 import com.everywaffle.team3server.user.repository.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -34,7 +33,7 @@ class CustomOAuth2UserService(
                 userSignUpService.signUp(userName = userName, password = "0000", email = "")
                 val newUser = userRepository.findByUserName(userName)
                 if (newUser != null) {
-                    val userResponse =userSignInService.localSignIn(newUser.userName, newUser.password)
+                    val userResponse = userSignInService.localSignIn(newUser.userName, newUser.password)
                 } else {
                     throw UserNotFoundException()
                 }
