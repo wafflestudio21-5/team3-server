@@ -45,7 +45,6 @@ class SecurityConfig(
                 it.userInfoEndpoint {
                     it.userService(customOAuth2UserService)
                 }
-                    .defaultSuccessUrl("/api/signin/token", true)
                     .successHandler(OAuth2AuthenticationSuccessHandler(jwtTokenProvider, ObjectMapper(), userRepository))
             }
         return http.build()
