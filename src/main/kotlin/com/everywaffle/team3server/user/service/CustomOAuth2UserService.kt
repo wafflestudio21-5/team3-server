@@ -1,6 +1,5 @@
 package com.everywaffle.team3server.user.service
 
-import com.everywaffle.team3server.auth.JwtTokenProvider
 import com.everywaffle.team3server.user.repository.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
