@@ -1,5 +1,5 @@
 import com.everywaffle.team3server.auth.JwtTokenProvider
-import com.everywaffle.team3server.user.dto.OAuth2AuthenticationResponse
+//import com.everywaffle.team3server.user.dto.OAuth2AuthenticationResponse
 import com.everywaffle.team3server.user.repository.UserRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.servlet.http.HttpServletRequest
