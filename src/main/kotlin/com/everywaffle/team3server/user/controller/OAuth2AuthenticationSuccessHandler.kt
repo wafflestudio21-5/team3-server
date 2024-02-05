@@ -28,7 +28,8 @@ class OAuth2AuthenticationSuccessHandler(
             userName = userEntity?.userName ?: "",
             passWord = userEntity?.password ?: ""
         )
-        response.contentType = "application/json;charset=UTF-8"
-        response.writer.write(objectMapper.writeValueAsString(authResponse))
+//        response.addHeader("Authorization", "Bearer " + tokenProvider.createToken(authResponse.userName))
+//        response.contentType = "application/json;charset=UTF-8"
+//        response.writer.write(objectMapper.writeValueAsString(authResponse))
     }
 }
