@@ -22,12 +22,13 @@ class OAuth2AuthenticationSuccessHandler(
         authentication: Authentication
     ) {
         val oAuth2User = authentication.principal as OAuth2User
-        val username = oAuth2User.name // OAuth2 인증으로부터 사용자 식별 정보 추출
-        val userEntity = userRepository.findByUserName("kakao-$username") ?: throw RuntimeException("User not found")
-        val authResponse = OAuth2AuthenticationResponse(
-            userName = userEntity?.userName ?: "",
-            passWord = userEntity?.password ?: ""
-        )
+        response.addHeader("Authorization", "Bearer " + tokenProvider.createToken(oAuth2User.name))
+//        val username = oAuth2User.name // OAuth2 인증으로부터 사용자 식별 정보 추출
+//        val userEntity = userRepository.findByUserName("kakao-$username") ?: throw RuntimeException("User not found")
+//        val authResponse = OAuth2AuthenticationResponse(
+//            userName = userEntity?.userName ?: "",
+//            passWord = userEntity?.password ?: ""
+//        )
 //        response.addHeader("Authorization", "Bearer " + tokenProvider.createToken(authResponse.userName))
 //        response.contentType = "application/json;charset=UTF-8"
 //        response.writer.write(objectMapper.writeValueAsString(authResponse))
